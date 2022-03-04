@@ -1,2 +1,2 @@
-# xxs.page
-XXS Testing Page
+# xss.page
+XSS Testing Page

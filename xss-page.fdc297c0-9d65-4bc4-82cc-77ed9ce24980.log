@@ -1,0 +1,183 @@
+2025-12-14T15:01:33.914864Z	Cloning repository...
+2025-12-14T15:01:35.468642Z	From https://github.com/Wh1t3Fox/xss.page
+2025-12-14T15:01:35.469446Z	 * branch            41f5ef1be2238fa6386da00a9056b1df15a9c95e -> FETCH_HEAD
+2025-12-14T15:01:35.469555Z	
+2025-12-14T15:01:35.499834Z	HEAD is now at 41f5ef1 build home page with tailwind css and update to next.js 15
+2025-12-14T15:01:35.50041Z	
+2025-12-14T15:01:35.626661Z	
+2025-12-14T15:01:35.665134Z	Success: Finished cloning repository files
+2025-12-14T15:01:38.372824Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-12-14T15:01:38.37333Z	
+2025-12-14T15:01:39.485854Z	No wrangler.toml file found. Continuing.
+2025-12-14T15:01:39.605546Z	Installing dependencies
+2025-12-14T15:01:39.614243Z	Python version set to 2.7
+2025-12-14T15:01:43.078919Z	v12.18.0 is already installed.
+2025-12-14T15:01:45.478646Z	Now using node v12.18.0 (npm v6.14.4)
+2025-12-14T15:01:45.637038Z	Started restoring cached build plugins
+2025-12-14T15:01:45.649554Z	Finished restoring cached build plugins
+2025-12-14T15:01:46.13322Z	Attempting ruby version 2.7.1, read from environment
+2025-12-14T15:01:47.577654Z	Using /opt/buildhome/.rvm/gems/ruby-2.7.1
+2025-12-14T15:01:48.839137Z	Using PHP version 5.6
+2025-12-14T15:01:48.930511Z	5.2.5 is already installed.
+2025-12-14T15:01:48.950421Z	Using Swift version 5.2.5
+2025-12-14T15:01:48.950921Z	Started restoring cached node modules
+2025-12-14T15:01:48.964845Z	Finished restoring cached node modules
+2025-12-14T15:01:49.290383Z	Installing NPM modules using NPM version 6.14.4
+2025-12-14T15:01:51.387462Z	npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@3. I'll try to do my best with it!
+2025-12-14T15:02:16.616718Z	
+2025-12-14T15:02:16.616984Z	> sharp@0.34.5 install /opt/buildhome/repo/node_modules/sharp
+2025-12-14T15:02:16.617138Z	> node install/check.js || npm run build
+2025-12-14T15:02:16.617231Z	
+2025-12-14T15:02:16.703597Z	sharp: skipping install check: Unexpected token '.'
+2025-12-14T15:02:16.818239Z	npm WARN notsup Unsupported engine for next@15.5.9: wanted: {"node":"^18.18.0 || ^19.8.0 || >= 20.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.818523Z	npm WARN notsup Not compatible with your version of node/npm: next@15.5.9
+2025-12-14T15:02:16.818727Z	npm WARN notsup Unsupported engine for serve@14.2.5: wanted: {"node":">= 14"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.818851Z	npm WARN notsup Not compatible with your version of node/npm: serve@14.2.5
+2025-12-14T15:02:16.818968Z	npm WARN notsup Unsupported engine for sharp@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.819081Z	npm WARN notsup Not compatible with your version of node/npm: sharp@0.34.5
+2025-12-14T15:02:16.819248Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-darwin-arm64@15.5.7 (node_modules/next/node_modules/@next/swc-darwin-arm64):
+2025-12-14T15:02:16.819374Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-darwin-arm64@15.5.7: wanted {"os":"darwin","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.819527Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-darwin-x64@15.5.7 (node_modules/next/node_modules/@next/swc-darwin-x64):
+2025-12-14T15:02:16.819632Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-darwin-x64@15.5.7: wanted {"os":"darwin","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.819723Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-linux-arm64-gnu@15.5.7 (node_modules/next/node_modules/@next/swc-linux-arm64-gnu):
+2025-12-14T15:02:16.81983Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-linux-arm64-gnu@15.5.7: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.819943Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-linux-arm64-musl@15.5.7 (node_modules/next/node_modules/@next/swc-linux-arm64-musl):
+2025-12-14T15:02:16.820051Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-linux-arm64-musl@15.5.7: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.820138Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-win32-arm64-msvc@15.5.7 (node_modules/next/node_modules/@next/swc-win32-arm64-msvc):
+2025-12-14T15:02:16.820224Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-win32-arm64-msvc@15.5.7: wanted {"os":"win32","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.820309Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @next/swc-win32-x64-msvc@15.5.7 (node_modules/next/node_modules/@next/swc-win32-x64-msvc):
+2025-12-14T15:02:16.820435Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @next/swc-win32-x64-msvc@15.5.7: wanted {"os":"win32","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.820536Z	npm WARN notsup Unsupported engine for @img/sharp-darwin-arm64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.820624Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-darwin-arm64@0.34.5
+2025-12-14T15:02:16.820709Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-darwin-arm64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-darwin-arm64):
+2025-12-14T15:02:16.820805Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-darwin-arm64@0.34.5: wanted {"os":"darwin","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.820895Z	npm WARN notsup Unsupported engine for @img/sharp-darwin-x64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.820998Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-darwin-x64@0.34.5
+2025-12-14T15:02:16.821083Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-darwin-x64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-darwin-x64):
+2025-12-14T15:02:16.821166Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-darwin-x64@0.34.5: wanted {"os":"darwin","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.82126Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-darwin-x64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-darwin-x64):
+2025-12-14T15:02:16.821377Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-darwin-x64@1.2.4: wanted {"os":"darwin","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.821508Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-darwin-arm64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-darwin-arm64):
+2025-12-14T15:02:16.821616Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-darwin-arm64@1.2.4: wanted {"os":"darwin","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.821717Z	npm WARN notsup Unsupported engine for @img/colour@1.0.0: wanted: {"node":">=18"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.821838Z	npm WARN notsup Not compatible with your version of node/npm: @img/colour@1.0.0
+2025-12-14T15:02:16.82194Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linux-ppc64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linux-ppc64):
+2025-12-14T15:02:16.822033Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linux-ppc64@1.2.4: wanted {"os":"linux","arch":"ppc64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.822117Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linux-arm@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linux-arm):
+2025-12-14T15:02:16.822199Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linux-arm@1.2.4: wanted {"os":"linux","arch":"arm"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.822281Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linux-arm64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linux-arm64):
+2025-12-14T15:02:16.822407Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linux-arm64@1.2.4: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.822502Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linux-riscv64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linux-riscv64):
+2025-12-14T15:02:16.82259Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linux-riscv64@1.2.4: wanted {"os":"linux","arch":"riscv64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.822674Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linux-s390x@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linux-s390x):
+2025-12-14T15:02:16.822768Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linux-s390x@1.2.4: wanted {"os":"linux","arch":"s390x"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.822868Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-libvips-linuxmusl-arm64@1.2.4 (node_modules/sharp/node_modules/@img/sharp-libvips-linuxmusl-arm64):
+2025-12-14T15:02:16.822971Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-libvips-linuxmusl-arm64@1.2.4: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.823062Z	npm WARN notsup Unsupported engine for @img/sharp-linux-arm@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.823153Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-arm@0.34.5
+2025-12-14T15:02:16.823235Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linux-arm@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linux-arm):
+2025-12-14T15:02:16.823338Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linux-arm@0.34.5: wanted {"os":"linux","arch":"arm"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.823449Z	npm WARN notsup Unsupported engine for @img/sharp-linux-ppc64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.82354Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-ppc64@0.34.5
+2025-12-14T15:02:16.823637Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linux-ppc64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linux-ppc64):
+2025-12-14T15:02:16.82373Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linux-ppc64@0.34.5: wanted {"os":"linux","arch":"ppc64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.823814Z	npm WARN notsup Unsupported engine for @img/sharp-linux-s390x@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.823902Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-s390x@0.34.5
+2025-12-14T15:02:16.824Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linux-s390x@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linux-s390x):
+2025-12-14T15:02:16.824081Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linux-s390x@0.34.5: wanted {"os":"linux","arch":"s390x"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.824173Z	npm WARN notsup Unsupported engine for @img/sharp-linux-riscv64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.824255Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-riscv64@0.34.5
+2025-12-14T15:02:16.824369Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linux-riscv64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linux-riscv64):
+2025-12-14T15:02:16.82447Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linux-riscv64@0.34.5: wanted {"os":"linux","arch":"riscv64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.824557Z	npm WARN notsup Unsupported engine for @img/sharp-linux-arm64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.824648Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-arm64@0.34.5
+2025-12-14T15:02:16.824741Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linux-arm64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linux-arm64):
+2025-12-14T15:02:16.824835Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linux-arm64@0.34.5: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.824921Z	npm WARN notsup Unsupported engine for @img/sharp-linux-x64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.825003Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linux-x64@0.34.5
+2025-12-14T15:02:16.825094Z	npm WARN notsup Unsupported engine for @img/sharp-linuxmusl-arm64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.825201Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linuxmusl-arm64@0.34.5
+2025-12-14T15:02:16.825285Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-linuxmusl-arm64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-linuxmusl-arm64):
+2025-12-14T15:02:16.82539Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-linuxmusl-arm64@0.34.5: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.825482Z	npm WARN notsup Unsupported engine for @img/sharp-wasm32@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.825563Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-wasm32@0.34.5
+2025-12-14T15:02:16.825655Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-wasm32@0.34.5 (node_modules/sharp/node_modules/@img/sharp-wasm32):
+2025-12-14T15:02:16.825751Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-wasm32@0.34.5: wanted {"os":"any","arch":"wasm32"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.825833Z	npm WARN notsup Unsupported engine for @img/sharp-linuxmusl-x64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.825938Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-linuxmusl-x64@0.34.5
+2025-12-14T15:02:16.82606Z	npm WARN notsup Unsupported engine for @img/sharp-win32-arm64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.826159Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-win32-arm64@0.34.5
+2025-12-14T15:02:16.826261Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-win32-arm64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-win32-arm64):
+2025-12-14T15:02:16.826389Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-win32-arm64@0.34.5: wanted {"os":"win32","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.826501Z	npm WARN notsup Unsupported engine for @img/sharp-win32-ia32@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.826606Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-win32-ia32@0.34.5
+2025-12-14T15:02:16.826705Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-win32-ia32@0.34.5 (node_modules/sharp/node_modules/@img/sharp-win32-ia32):
+2025-12-14T15:02:16.826793Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-win32-ia32@0.34.5: wanted {"os":"win32","arch":"ia32"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.827029Z	npm WARN notsup Unsupported engine for @img/sharp-win32-x64@0.34.5: wanted: {"node":"^18.17.0 || ^20.3.0 || >=21.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.827148Z	npm WARN notsup Not compatible with your version of node/npm: @img/sharp-win32-x64@0.34.5
+2025-12-14T15:02:16.827247Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @img/sharp-win32-x64@0.34.5 (node_modules/sharp/node_modules/@img/sharp-win32-x64):
+2025-12-14T15:02:16.827342Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @img/sharp-win32-x64@0.34.5: wanted {"os":"win32","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.827466Z	npm WARN notsup Unsupported engine for boxen@7.0.0: wanted: {"node":">=14.16"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.827554Z	npm WARN notsup Not compatible with your version of node/npm: boxen@7.0.0
+2025-12-14T15:02:16.827631Z	npm WARN notsup Unsupported engine for clipboardy@3.0.0: wanted: {"node":"^12.20.0 || ^14.13.1 || >=16.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.827703Z	npm WARN notsup Not compatible with your version of node/npm: clipboardy@3.0.0
+2025-12-14T15:02:16.827776Z	npm WARN notsup Unsupported engine for is-port-reachable@4.0.0: wanted: {"node":"^12.20.0 || ^14.13.1 || >=16.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.82786Z	npm WARN notsup Not compatible with your version of node/npm: is-port-reachable@4.0.0
+2025-12-14T15:02:16.827948Z	npm WARN notsup Unsupported engine for camelcase@7.0.1: wanted: {"node":">=14.16"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.82803Z	npm WARN notsup Not compatible with your version of node/npm: camelcase@7.0.1
+2025-12-14T15:02:16.828113Z	npm WARN notsup Unsupported engine for type-fest@2.19.0: wanted: {"node":">=12.20"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.8282Z	npm WARN notsup Not compatible with your version of node/npm: type-fest@2.19.0
+2025-12-14T15:02:16.828294Z	npm WARN notsup Unsupported engine for tailwindcss@3.4.19: wanted: {"node":">=14.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.828406Z	npm WARN notsup Not compatible with your version of node/npm: tailwindcss@3.4.19
+2025-12-14T15:02:16.828501Z	npm WARN notsup Unsupported engine for sucrase@3.35.1: wanted: {"node":">=16 || 14 >=14.17"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.828582Z	npm WARN notsup Not compatible with your version of node/npm: sucrase@3.35.1
+2025-12-14T15:02:16.828663Z	npm WARN notsup Unsupported engine for lilconfig@3.1.3: wanted: {"node":">=14"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.828753Z	npm WARN notsup Not compatible with your version of node/npm: lilconfig@3.1.3
+2025-12-14T15:02:16.828829Z	npm WARN notsup Unsupported engine for postcss-import@15.1.0: wanted: {"node":">=14.0.0"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.828904Z	npm WARN notsup Not compatible with your version of node/npm: postcss-import@15.1.0
+2025-12-14T15:02:16.828982Z	npm WARN notsup Unsupported engine for postcss-load-config@6.0.1: wanted: {"node":">= 18"} (current: {"node":"12.18.0","npm":"6.14.4"})
+2025-12-14T15:02:16.829051Z	npm WARN notsup Not compatible with your version of node/npm: postcss-load-config@6.0.1
+2025-12-14T15:02:16.829131Z	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules/chokidar/node_modules/fsevents):
+2025-12-14T15:02:16.829216Z	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+2025-12-14T15:02:16.829288Z	
+2025-12-14T15:02:16.829374Z	added 190 packages from 230 contributors and audited 217 packages in 25.477s
+2025-12-14T15:02:16.877873Z	
+2025-12-14T15:02:16.878161Z	54 packages are looking for funding
+2025-12-14T15:02:16.87831Z	  run `npm fund` for details
+2025-12-14T15:02:16.878445Z	
+2025-12-14T15:02:16.878564Z	found 0 vulnerabilities
+2025-12-14T15:02:16.878682Z	
+2025-12-14T15:02:16.899012Z	NPM modules installed
+2025-12-14T15:02:16.978168Z	Installing Hugo 0.54.0
+2025-12-14T15:02:17.686829Z	Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z
+2025-12-14T15:02:17.688794Z	Started restoring cached go cache
+2025-12-14T15:02:17.70031Z	Finished restoring cached go cache
+2025-12-14T15:02:17.773871Z	go version go1.14.4 linux/amd64
+2025-12-14T15:02:17.783284Z	go version go1.14.4 linux/amd64
+2025-12-14T15:02:17.786101Z	Installing missing commands
+2025-12-14T15:02:17.7865Z	Verify run directory
+2025-12-14T15:02:17.786884Z	Executing user command: npm run export
+2025-12-14T15:02:18.14691Z	
+2025-12-14T15:02:18.147234Z	> @ export /opt/buildhome/repo
+2025-12-14T15:02:18.147333Z	> serve out
+2025-12-14T15:02:18.147569Z	
+2025-12-14T15:02:18.208367Z	(node:1279) ExperimentalWarning: The ESM module loader is experimental.
+2025-12-14T15:02:18.214958Z	file:///opt/buildhome/repo/node_modules/serve/build/main.js:172
+2025-12-14T15:02:18.215132Z	      const ipAddress = request.socket.remoteAddress?.replace("::ffff:", "") ?? "unknown";
+2025-12-14T15:02:18.215265Z	                                                     ^
+2025-12-14T15:02:18.215418Z	
+2025-12-14T15:02:18.215512Z	SyntaxError: Unexpected token '.'
+2025-12-14T15:02:18.215597Z	    at Loader.moduleStrategy (internal/modules/esm/translators.js:81:18)
+2025-12-14T15:02:18.21576Z	    at async link (internal/modules/esm/module_job.js:37:21)
+2025-12-14T15:02:18.219555Z	npm ERR! code ELIFECYCLE
+2025-12-14T15:02:18.219795Z	npm ERR! errno 1
+2025-12-14T15:02:18.22055Z	npm ERR! @ export: `serve out`
+2025-12-14T15:02:18.220714Z	npm ERR! Exit status 1
+2025-12-14T15:02:18.22082Z	npm ERR! 
+2025-12-14T15:02:18.220914Z	npm ERR! Failed at the @ export script.
+2025-12-14T15:02:18.221019Z	npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+2025-12-14T15:02:18.225086Z	
+2025-12-14T15:02:18.225234Z	npm ERR! A complete log of this run can be found in:
+2025-12-14T15:02:18.225334Z	npm ERR!     /opt/buildhome/.npm/_logs/2025-12-14T15_02_18_221Z-debug.log
+2025-12-14T15:02:18.231734Z	Failed: build command exited with code: 1
+2025-12-14T15:02:19.279303Z	Failed: error occurred while running build command

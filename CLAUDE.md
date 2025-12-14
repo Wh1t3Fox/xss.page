@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a public documentation website for Cross-Site Scripting (XSS) vulnerabilities, built with Next.js. The site provides comprehensive examples, testing methodologies, and educational resources for finding and understanding XSS vulnerabilities. It is hosted on GitHub and served via Cloudflare Workers.
+This is a public documentation website for Cross-Site Scripting (XSS) vulnerabilities, built with Next.js. The site provides comprehensive examples, testing methodologies, and educational resources for finding and understanding XSS vulnerabilities. It is hosted on GitHub and served via Cloudflare Pages.
 
 ## Development Commands
 
@@ -34,7 +34,7 @@ This project uses Next.js configured for static site generation. The build proce
 ### Deployment Architecture
 
 - **Hosting**: GitHub repository
-- **CDN/Serving**: Cloudflare Workers serves the static Next.js export
+- **CDN/Serving**: Cloudflare Pages serves the static Next.js export
 - **Build Output**: Static HTML/JS/CSS files exported to `/out` directory
 
 ### Page Structure

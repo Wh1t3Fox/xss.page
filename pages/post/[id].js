@@ -41,7 +41,7 @@ export default function Post({ title, body }) {
       <p>{body}</p>
 
       <Link href="/">
-        <a>Go back to home</a>
+        Go back to home
       </Link>
     </main>
   )

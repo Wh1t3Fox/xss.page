@@ -13,6 +13,12 @@ export default function Layout({ children, title = 'XSS.page - XSS Documentation
               <Link href="/" className="text-gray-700 hover:text-primary-600">
                 Home
               </Link>
+              <Link href="/playground" className="text-gray-700 hover:text-primary-600">
+                Playground
+              </Link>
+              <Link href="/payloads" className="text-gray-700 hover:text-primary-600">
+                Payloads
+              </Link>
               <a
                 href="https://github.com/Wh1t3Fox/xss.page"
                 className="text-gray-700 hover:text-primary-600"

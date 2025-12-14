@@ -16,7 +16,7 @@ export default function Payloads() {
     <Layout>
       <Head>
         <title>XSS Payload Cheat Sheet - XSS.page</title>
-        <meta name="description" content="Comprehensive XSS payload cheat sheet with 50+ examples for educational purposes" />
+        <meta name="description" content="Comprehensive XSS payload cheat sheet with 150 examples for educational and authorized testing purposes" />
       </Head>
 
       <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
@@ -25,7 +25,7 @@ export default function Payloads() {
             XSS Payload Cheat Sheet
           </h1>
           <p className="text-xl text-primary-100 mb-8">
-            Comprehensive collection of 50+ XSS payloads organized by technique and context
+            Comprehensive collection of 150 XSS payloads organized by technique and context
           </p>
 
           {/* Warning */}
@@ -43,15 +43,25 @@ export default function Payloads() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Search */}
-        <div className="mb-8">
+        {/* Search and Download */}
+        <div className="mb-8 flex flex-col md:flex-row gap-4">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search payloads..."
-            className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="flex-1 px-6 py-4 text-lg border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
+          <a
+            href="/xss-payloads.txt"
+            download="xss-payloads.txt"
+            className="bg-primary-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-primary-700 transition inline-flex items-center justify-center whitespace-nowrap"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download TXT
+          </a>
         </div>
 
         {/* Categories */}

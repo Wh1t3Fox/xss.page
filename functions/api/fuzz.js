@@ -10,12 +10,14 @@
  * POST Request Body:
  * {
  *   "payload": "<script>alert(1)</script>",
- *   "strategies": ["htmlEntities", "urlEncoding", "caseVariations"]
+ *   "strategies": ["htmlEntities", "urlEncoding", "caseVariations"],
+ *   "limit": 10
  * }
  *
  * GET Query Parameters:
  * - payload: Base payload to mutate (required)
  * - strategies: Comma-separated list of strategies (optional)
+ * - limit: Maximum number of mutations to return (optional, default: 1, max: 500)
  *
  * Available Strategies:
  * - htmlEntities: HTML entity encoding
@@ -33,10 +35,10 @@
  * Example POST:
  * curl -X POST https://xss.page/api/fuzz \
  *   -H "Content-Type: application/json" \
- *   -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"]}'
+ *   -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"],"limit":10}'
  *
  * Example GET:
- * curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding"
+ * curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding&limit=5"
  */
 
 import { generateMutations } from '../../utils/payload-fuzzer.mjs';
@@ -91,7 +93,7 @@ function parseStrategies(strategies) {
 export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
-    const { payload, strategies } = body;
+    const { payload, strategies, limit } = body;
 
     // Validate payload
     if (!payload || typeof payload !== 'string') {
@@ -115,13 +117,35 @@ export async function onRequestPost(context) {
       });
     }
 
+    // Parse and validate limit (default: 1, min: 1, max: 500)
+    let resultLimit = parseInt(limit, 10);
+    if (isNaN(resultLimit) || resultLimit < 1) {
+      resultLimit = 1; // Default
+    }
+    if (resultLimit > 500) {
+      resultLimit = 500; // Maximum
+    }
+
     // Parse and validate strategies
     const strategyObj = parseStrategies(strategies);
 
     // Generate mutations
     const results = generateMutations(payload, strategyObj);
 
-    return new Response(JSON.stringify(results, null, 2), {
+    // Apply limit to mutations
+    const limitedMutations = results.mutations.slice(0, resultLimit);
+
+    // Build response with limit information
+    const response = {
+      basePayload: payload,
+      strategies: results.strategies,
+      total: results.total,
+      returned: limitedMutations.length,
+      limit: resultLimit,
+      mutations: limitedMutations
+    };
+
+    return new Response(JSON.stringify(response, null, 2), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
@@ -155,7 +179,7 @@ export async function onRequestGet(context) {
       return new Response(JSON.stringify({
         error: 'Bad Request',
         message: 'Payload query parameter is required',
-        example: '/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding'
+        example: '/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding&limit=10'
       }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -173,6 +197,16 @@ export async function onRequestGet(context) {
       });
     }
 
+    // Parse and validate limit (default: 1, min: 1, max: 500)
+    const limitParam = searchParams.get('limit');
+    let resultLimit = parseInt(limitParam, 10);
+    if (isNaN(resultLimit) || resultLimit < 1) {
+      resultLimit = 1; // Default
+    }
+    if (resultLimit > 500) {
+      resultLimit = 500; // Maximum
+    }
+
     // Get strategies from query parameter
     const strategiesParam = searchParams.get('strategies');
     const strategyObj = parseStrategies(strategiesParam);
@@ -180,7 +214,20 @@ export async function onRequestGet(context) {
     // Generate mutations
     const results = generateMutations(payload, strategyObj);
 
-    return new Response(JSON.stringify(results, null, 2), {
+    // Apply limit to mutations
+    const limitedMutations = results.mutations.slice(0, resultLimit);
+
+    // Build response with limit information
+    const response = {
+      basePayload: payload,
+      strategies: results.strategies,
+      total: results.total,
+      returned: limitedMutations.length,
+      limit: resultLimit,
+      mutations: limitedMutations
+    };
+
+    return new Response(JSON.stringify(response, null, 2), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',

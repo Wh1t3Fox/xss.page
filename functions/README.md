@@ -102,13 +102,15 @@ Real-time payload mutation engine. Generates XSS payload variations using encodi
 ```json
 {
   "payload": "<script>alert(1)</script>",
-  "strategies": ["htmlEntities", "urlEncoding", "caseVariations"]
+  "strategies": ["htmlEntities", "urlEncoding", "caseVariations"],
+  "limit": 10
 }
 ```
 
 **GET Query Parameters:**
 - `payload` - Base payload to mutate (required)
 - `strategies` - Comma-separated list of strategies (optional, defaults to all)
+- `limit` - Maximum number of mutations to return (optional, default: 1, max: 500)
 
 **Available Strategies:**
 - `htmlEntities` - HTML entity encoding (&#x73;&#x63;&#x72;...)
@@ -126,45 +128,54 @@ Real-time payload mutation engine. Generates XSS payload variations using encodi
 **Examples:**
 
 ```bash
-# POST with specific strategies
+# POST with default limit (1 mutation)
 curl -X POST "https://xss.page/api/fuzz" \
   -H "Content-Type: application/json" \
   -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"]}'
 
-# GET with all strategies (testing)
+# POST with custom limit
+curl -X POST "https://xss.page/api/fuzz" \
+  -H "Content-Type: application/json" \
+  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"],"limit":10}'
+
+# GET with default limit (1 mutation)
 curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>"
 
-# GET with specific strategies
-curl "https://xss.page/api/fuzz?payload=<img src=x>&strategies=htmlEntities,caseVariations"
+# GET with specific strategies and limit
+curl "https://xss.page/api/fuzz?payload=<img src=x>&strategies=htmlEntities,caseVariations&limit=5"
 ```
 
 **Response:**
 ```json
 {
   "basePayload": "<script>alert(1)</script>",
-  "strategies": {
-    "htmlEntities": true,
-    "urlEncoding": true,
-    "caseVariations": false
-  },
+  "strategies": ["htmlEntities", "urlEncoding"],
   "total": 24,
+  "returned": 10,
+  "limit": 10,
   "mutations": [
     {
       "strategy": "HTML Entities (Hex)",
       "payload": "&#x3c;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3e;...",
-      "description": "Full hex entity encoding"
+      "encoding": "html"
     },
     {
       "strategy": "URL Encoding (Single)",
       "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
-      "description": "URL percent encoding"
+      "encoding": "url"
     }
   ]
 }
 ```
 
+**Response Fields:**
+- `total` - Total number of mutations generated
+- `returned` - Actual number of mutations returned (limited by `limit`)
+- `limit` - The limit value used for this request
+
 **Limits:**
 - Maximum payload size: 5000 characters
+- Maximum mutations returned: 500 per request (default: 1)
 - Rate limited by Cloudflare's standard limits
 
 ## How It Works

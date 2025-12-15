@@ -9,7 +9,8 @@ functions/
 └── api/
     ├── _middleware.js    # CORS handling for all /api/* endpoints
     ├── hello.js          # Test endpoint
-    └── search.js         # Dynamic payload search
+    ├── search.js         # Dynamic payload search
+    └── fuzz.js           # Payload mutation fuzzer
 ```
 
 ## Available Endpoints
@@ -86,6 +87,85 @@ curl "https://xss.page/api/search?q=onerror&context=html&browser=chrome&limit=50
   ]
 }
 ```
+
+### Payload Fuzzer
+
+**POST/GET** `/api/fuzz`
+
+Real-time payload mutation engine. Generates XSS payload variations using encoding, obfuscation, and case manipulation strategies.
+
+**Methods:**
+- `POST` - JSON body with payload and strategies (recommended)
+- `GET` - Query parameters (for testing)
+
+**POST Request Body:**
+```json
+{
+  "payload": "<script>alert(1)</script>",
+  "strategies": ["htmlEntities", "urlEncoding", "caseVariations"]
+}
+```
+
+**GET Query Parameters:**
+- `payload` - Base payload to mutate (required)
+- `strategies` - Comma-separated list of strategies (optional, defaults to all)
+
+**Available Strategies:**
+- `htmlEntities` - HTML entity encoding (&#x73;&#x63;&#x72;...)
+- `urlEncoding` - URL percent encoding (%3Cscript%3E...)
+- `unicodeEscapes` - Unicode escape sequences (\u003Cscript\u003E...)
+- `base64` - Base64 encoding (PHNjcmlwdD4...)
+- `caseVariations` - Case permutations (<ScRiPt>...)
+- `quoteSubstitution` - Quote variations (' vs " vs `)
+- `whitespaceVariation` - Whitespace manipulation
+- `nullBytes` - Null byte injection (%00)
+- `comments` - HTML/JS comment insertion
+- `protocolVariation` - Protocol mutations (javascript:, data:)
+- `obfuscation` - Advanced obfuscation techniques
+
+**Examples:**
+
+```bash
+# POST with specific strategies
+curl -X POST "https://xss.page/api/fuzz" \
+  -H "Content-Type: application/json" \
+  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"]}'
+
+# GET with all strategies (testing)
+curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>"
+
+# GET with specific strategies
+curl "https://xss.page/api/fuzz?payload=<img src=x>&strategies=htmlEntities,caseVariations"
+```
+
+**Response:**
+```json
+{
+  "basePayload": "<script>alert(1)</script>",
+  "strategies": {
+    "htmlEntities": true,
+    "urlEncoding": true,
+    "caseVariations": false
+  },
+  "total": 24,
+  "mutations": [
+    {
+      "strategy": "HTML Entities (Hex)",
+      "payload": "&#x3c;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3e;...",
+      "description": "Full hex entity encoding"
+    },
+    {
+      "strategy": "URL Encoding (Single)",
+      "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+      "description": "URL percent encoding"
+    }
+  ]
+}
+```
+
+**Limits:**
+- Maximum payload size: 5000 characters
+- Rate limited by Cloudflare's standard limits
 
 ## How It Works
 

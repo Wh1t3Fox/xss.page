@@ -83,6 +83,22 @@ export default function APIDocsPage() {
         returned: 45,
         payloads: "[...filtered payload objects]"
       }
+    },
+    {
+      id: 'fuzz',
+      name: 'Payload Fuzzer (Dynamic)',
+      path: '/api/fuzz',
+      description: 'Real-time payload mutation engine powered by Cloudflare Pages Functions. Generate XSS payload variations using encoding, obfuscation, and case manipulation strategies. Supports both GET and POST requests.',
+      response: {
+        basePayload: "<script>alert(1)</script>",
+        strategies: {
+          htmlEntities: true,
+          urlEncoding: true,
+          caseVariations: true
+        },
+        total: 45,
+        mutations: "[...mutated payload variants]"
+      }
     }
   ];
 
@@ -93,8 +109,16 @@ curl https://xss.page/api/payloads.json
 # Fetch categories
 curl https://xss.page/api/categories.json
 
-# Fetch payloads organized by category
-curl https://xss.page/api/payloads-by-category.json`,
+# Search for payloads (dynamic)
+curl "https://xss.page/api/search?q=script&category=basic&limit=20"
+
+# Generate payload mutations (GET)
+curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding"
+
+# Generate payload mutations (POST)
+curl -X POST https://xss.page/api/fuzz \\
+  -H "Content-Type: application/json" \\
+  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding","caseVariations"]}'`,
 
     javascript: `// Fetch all payloads
 fetch('https://xss.page/api/payloads.json')
@@ -106,12 +130,26 @@ fetch('https://xss.page/api/payloads.json')
     });
   });
 
-// Fetch specific category
-fetch('https://xss.page/api/payloads-by-category.json')
+// Search for payloads dynamically
+fetch('https://xss.page/api/search?q=script&category=basic')
   .then(response => response.json())
   .then(data => {
-    const basicPayloads = data.categories.basic;
-    console.log(\`Found \${basicPayloads.length} basic payloads\`);
+    console.log(\`Found \${data.count} payloads matching query\`);
+  });
+
+// Generate payload mutations
+fetch('https://xss.page/api/fuzz', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    payload: '<script>alert(1)</script>',
+    strategies: ['htmlEntities', 'urlEncoding', 'caseVariations']
+  })
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(\`Generated \${data.total} mutations\`);
+    data.mutations.forEach(m => console.log(\`[\${m.strategy}] \${m.payload}\`));
   });`,
 
     python: `import requests
@@ -120,25 +158,29 @@ import json
 # Fetch all payloads
 response = requests.get('https://xss.page/api/payloads.json')
 data = response.json()
-
 print(f"Loaded {data['count']} payloads")
 
-# Filter by severity
-critical_payloads = [
-    p for p in data['payloads']
-    if p['severity'] == 'critical'
-]
+# Search for payloads dynamically
+response = requests.get('https://xss.page/api/search', params={
+    'q': 'script',
+    'category': 'basic',
+    'severity': 'high',
+    'limit': 20
+})
+search_data = response.json()
+print(f"Found {search_data['count']} matching payloads")
 
-print(f"Found {len(critical_payloads)} critical payloads")
+# Generate payload mutations
+payload_data = {
+    'payload': '<script>alert(1)</script>',
+    'strategies': ['htmlEntities', 'urlEncoding', 'caseVariations']
+}
+response = requests.post('https://xss.page/api/fuzz', json=payload_data)
+fuzz_data = response.json()
 
-# Filter by context
-html_payloads = [
-    p for p in data['payloads']
-    if p['context'] == 'html'
-]
-
-for payload in html_payloads[:5]:
-    print(f"[{payload['category']}] {payload['payload']}")`,
+print(f"Generated {fuzz_data['total']} mutations")
+for mutation in fuzz_data['mutations'][:5]:
+    print(f"[{mutation['strategy']}] {mutation['payload']}")`,
 
     burp: `// Burp Suite Extension Example (Java)
 import burp.*;

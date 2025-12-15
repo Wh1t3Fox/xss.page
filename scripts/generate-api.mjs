@@ -10,7 +10,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Import payload data
-import { payloads } from '../data/payloads.js';
+import { payloads } from '../data/payloads.mjs';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);

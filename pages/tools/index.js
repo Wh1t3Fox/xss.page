@@ -37,7 +37,7 @@ export default function Tools() {
         </svg>
       ),
       href: '/tools/fuzzer',
-      status: 'coming',
+      status: 'available',
       tags: ['Fuzzing', 'Mutations', 'Bypass Testing']
     },
     {

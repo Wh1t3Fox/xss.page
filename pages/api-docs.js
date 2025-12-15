@@ -57,6 +57,19 @@ export default function APIDocsPage() {
         },
         example: "{ ...payload object }"
       }
+    },
+    {
+      id: 'fuzzer',
+      name: 'Fuzzer Mutations',
+      path: '/api/fuzzer-mutations.json',
+      description: 'Pre-generated payload mutations using various encoding and obfuscation strategies. Includes HTML entities, URL encoding, case variations, and more.',
+      response: {
+        version: "1.0",
+        totalBasePayloads: 10,
+        totalMutations: 250,
+        strategies: "['htmlEntities', 'urlEncoding', 'caseVariations', ...]",
+        basePayloads: "[...objects with base payload and mutations array]"
+      }
     }
   ];
 

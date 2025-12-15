@@ -1,26 +1,46 @@
 import { useState, useEffect } from 'react';
 
 /**
- * Tab navigation component with URL hash-based state
+ * Tab navigation component - supports both controlled and uncontrolled modes
+ *
+ * Controlled mode (recommended):
+ * @param {array} tabs - Array of tab objects with id and label
+ * @param {string} activeTab - Current active tab ID (controlled)
+ * @param {function} onTabChange - Callback when tab changes (controlled)
+ *
+ * Uncontrolled mode (legacy):
  * @param {array} tabs - Array of tab objects with id, label, and content
  * @param {string} defaultTab - Default active tab ID
  */
-export default function TabNavigation({ tabs, defaultTab }) {
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
+export default function TabNavigation({ tabs, activeTab: controlledActiveTab, onTabChange, defaultTab }) {
+  // Internal state for uncontrolled mode
+  const [internalActiveTab, setInternalActiveTab] = useState(defaultTab || tabs[0]?.id);
 
-  // Sync with URL hash on mount
+  // Determine if we're in controlled mode
+  const isControlled = controlledActiveTab !== undefined && onTabChange !== undefined;
+  const activeTab = isControlled ? controlledActiveTab : internalActiveTab;
+
+  // Sync with URL hash on mount (uncontrolled mode only)
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    const validTab = tabs.find(t => t.id === hash);
-    if (validTab) {
-      setActiveTab(hash);
+    if (!isControlled) {
+      const hash = window.location.hash.slice(1);
+      const validTab = tabs.find(t => t.id === hash);
+      if (validTab) {
+        setInternalActiveTab(hash);
+      }
     }
-  }, [tabs]);
+  }, [tabs, isControlled]);
 
-  // Update URL hash when tab changes
+  // Handle tab changes
   const handleTabChange = (tabId) => {
-    setActiveTab(tabId);
-    window.location.hash = tabId;
+    if (isControlled) {
+      // Controlled mode: call the parent's callback
+      onTabChange(tabId);
+    } else {
+      // Uncontrolled mode: manage internal state and URL hash
+      setInternalActiveTab(tabId);
+      window.location.hash = tabId;
+    }
   };
 
   const activeTabData = tabs.find(t => t.id === activeTab) || tabs[0];
@@ -49,10 +69,12 @@ export default function TabNavigation({ tabs, defaultTab }) {
         </nav>
       </div>
 
-      {/* Tab Content */}
-      <div className="py-6">
-        {activeTabData?.content}
-      </div>
+      {/* Tab Content - only render in uncontrolled mode with content */}
+      {!isControlled && activeTabData?.content && (
+        <div className="py-6">
+          {activeTabData.content}
+        </div>
+      )}
     </div>
   );
 }

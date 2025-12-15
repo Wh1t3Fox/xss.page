@@ -19,6 +19,9 @@ export default function Layout({ children, title = 'XSS.page - XSS Documentation
               <Link href="/payloads" className="text-gray-700 hover:text-primary-600">
                 Payloads
               </Link>
+              <Link href="/tools" className="text-gray-700 hover:text-primary-600">
+                Tools
+              </Link>
               <a
                 href="https://github.com/Wh1t3Fox/xss.page"
                 className="text-gray-700 hover:text-primary-600"

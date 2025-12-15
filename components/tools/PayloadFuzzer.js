@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { generateMutations, testAgainstFilter, formatStrategyName } from '../../utils/payload-fuzzer';
+import { generateMutations, testAgainstFilter, formatStrategyName } from '../../utils/payload-fuzzer.mjs';
 import { copyToClipboard } from '../../utils/clipboard';
 
 export default function PayloadFuzzer() {

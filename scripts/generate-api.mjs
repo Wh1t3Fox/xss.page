@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 
 // Import payload data
 import { payloads } from '../data/payloads.mjs';
-import { generateMutations } from '../utils/payload-fuzzer.js';
+import { generateMutations } from '../utils/payload-fuzzer.mjs';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);

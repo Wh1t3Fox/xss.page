@@ -19,6 +19,7 @@ export default function PayloadFuzzer() {
     obfuscation: false
   });
   const [filterPattern, setFilterPattern] = useState('');
+  const [limit, setLimit] = useState(100);
   const [results, setResults] = useState(null);
   const [filterResults, setFilterResults] = useState(null);
   const [copiedIndex, setCopiedIndex] = useState(null);
@@ -47,10 +48,22 @@ export default function PayloadFuzzer() {
     }
 
     const mutationResults = generateMutations(basePayload, strategies);
-    setResults(mutationResults);
+
+    // Apply limit to mutations
+    const limitValue = Math.max(1, Math.min(parseInt(limit) || 100, 500));
+    const limitedMutations = mutationResults.mutations.slice(0, limitValue);
+
+    const limitedResults = {
+      ...mutationResults,
+      mutations: limitedMutations,
+      returned: limitedMutations.length,
+      limit: limitValue
+    };
+
+    setResults(limitedResults);
 
     if (filterPattern && filterPattern.trim()) {
-      const filterTests = testAgainstFilter(mutationResults.mutations, filterPattern);
+      const filterTests = testAgainstFilter(limitedMutations, filterPattern);
       setFilterResults(filterTests);
     } else {
       setFilterResults(null);
@@ -214,6 +227,57 @@ export default function PayloadFuzzer() {
         </div>
       </div>
 
+      {/* Result Limit */}
+      <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Result Limit</h3>
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <input
+              type="number"
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+              min="1"
+              max="500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+            />
+          </div>
+          <div className="flex-shrink-0">
+            <span className="text-sm text-gray-600">
+              Max: 500 mutations
+            </span>
+          </div>
+        </div>
+        <p className="text-sm text-gray-500 mt-2">
+          Limit the number of mutations displayed (1-500). Default: 100.
+        </p>
+        <div className="flex gap-2 mt-3">
+          <button
+            onClick={() => setLimit(10)}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+          >
+            10
+          </button>
+          <button
+            onClick={() => setLimit(50)}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+          >
+            50
+          </button>
+          <button
+            onClick={() => setLimit(100)}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+          >
+            100
+          </button>
+          <button
+            onClick={() => setLimit(500)}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+          >
+            All (500)
+          </button>
+        </div>
+      </div>
+
       {/* Optional Filter Testing */}
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -258,7 +322,11 @@ export default function PayloadFuzzer() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-50 rounded-lg">
               <div className="text-3xl font-bold text-blue-700">{results.total}</div>
-              <div className="text-sm text-blue-600 mt-1">Total Variations</div>
+              <div className="text-sm text-blue-600 mt-1">Total Generated</div>
+            </div>
+            <div className="text-center p-4 bg-indigo-50 rounded-lg">
+              <div className="text-3xl font-bold text-indigo-700">{results.returned || results.mutations.length}</div>
+              <div className="text-sm text-indigo-600 mt-1">Displayed</div>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg">
               <div className="text-3xl font-bold text-purple-700">{results.strategies.length}</div>

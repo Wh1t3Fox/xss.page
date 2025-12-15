@@ -1,0 +1,169 @@
+{
+  "version": "1.0",
+  "generated": "2025-12-15T01:08:20.414Z",
+  "total": 27,
+  "categories": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "count": 3,
+      "description": "Classic XSS payloads using script tags and basic injection techniques"
+    },
+    {
+      "id": "event-handler",
+      "name": "Event Handlers",
+      "count": 19,
+      "description": "XSS through HTML event handlers like onclick, onerror, onload"
+    },
+    {
+      "id": "svg",
+      "name": "SVG-based",
+      "count": 8,
+      "description": "SVG-based XSS vectors using inline SVG elements"
+    },
+    {
+      "id": "html5",
+      "name": "HTML5 Tags",
+      "count": 5,
+      "description": "Modern HTML5 tag-based XSS techniques"
+    },
+    {
+      "id": "javascript",
+      "name": "javascript",
+      "count": 9,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "url",
+      "name": "url",
+      "count": 2,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "attribute",
+      "name": "attribute",
+      "count": 5,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "bypass",
+      "name": "bypass",
+      "count": 12,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "encoding",
+      "name": "Encoding Tricks",
+      "count": 4,
+      "description": "Encoding-based bypass techniques (HTML entities, URL encoding, etc.)"
+    },
+    {
+      "id": "polyglot",
+      "name": "Polyglots",
+      "count": 8,
+      "description": "Universal payloads that work in multiple contexts"
+    },
+    {
+      "id": "dom",
+      "name": "dom",
+      "count": 4,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "waf-bypass",
+      "name": "WAF Bypasses",
+      "count": 12,
+      "description": "Payloads designed to bypass Web Application Firewalls"
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "count": 10,
+      "description": "Advanced and sophisticated XSS techniques"
+    },
+    {
+      "id": "legacy",
+      "name": "legacy",
+      "count": 2,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "modern",
+      "name": "Modern",
+      "count": 12,
+      "description": "Modern browser-specific XSS vectors"
+    },
+    {
+      "id": "style",
+      "name": "style",
+      "count": 5,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "xml",
+      "name": "xml",
+      "count": 3,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "protocol",
+      "name": "protocol",
+      "count": 3,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "obfuscation",
+      "name": "Obfuscation",
+      "count": 5,
+      "description": "Obfuscated and encoded XSS payloads"
+    },
+    {
+      "id": "framework",
+      "name": "framework",
+      "count": 5,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "mobile",
+      "name": "mobile",
+      "count": 2,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "data-uri",
+      "name": "Data URI",
+      "count": 4,
+      "description": "Data URI scheme XSS exploitation"
+    },
+    {
+      "id": "comment",
+      "name": "comment",
+      "count": 2,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "meta",
+      "name": "meta",
+      "count": 1,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "interaction",
+      "name": "interaction",
+      "count": 2,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "content-type",
+      "name": "content-type",
+      "count": 1,
+      "description": "XSS payload category"
+    },
+    {
+      "id": "css",
+      "name": "css",
+      "count": 2,
+      "description": "XSS payload category"
+    }
+  ]
+}

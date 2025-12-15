@@ -61,7 +61,7 @@ export default function Tools() {
         </svg>
       ),
       href: '/api-docs',
-      status: 'coming',
+      status: 'available',
       tags: ['API', 'Integration', 'JSON']
     },
     {

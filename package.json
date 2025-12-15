@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-api.js",
     "build": "next build",
     "start": "next start",
     "export": "serve out"

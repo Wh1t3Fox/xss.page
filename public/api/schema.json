@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "generated": "2025-12-15T01:08:20.414Z",
+  "schema": {
+    "type": "object",
+    "required": [
+      "id",
+      "payload",
+      "category",
+      "technique",
+      "context",
+      "description",
+      "severity",
+      "browsers"
+    ],
+    "properties": {
+      "id": {
+        "type": "number",
+        "description": "Unique identifier for the payload"
+      },
+      "payload": {
+        "type": "string",
+        "description": "The actual XSS payload string"
+      },
+      "category": {
+        "type": "string",
+        "description": "Category of the XSS technique (e.g., basic, event-handler, svg)",
+        "examples": [
+          "basic",
+          "event-handler",
+          "svg",
+          "filter-bypass"
+        ]
+      },
+      "technique": {
+        "type": "string",
+        "description": "Specific technique used in the payload"
+      },
+      "context": {
+        "type": "string",
+        "description": "Context where the payload is effective",
+        "enum": [
+          "html",
+          "javascript",
+          "url",
+          "attribute",
+          "xml",
+          "dom",
+          "css",
+          "json"
+        ]
+      },
+      "description": {
+        "type": "string",
+        "description": "Explanation of how the payload works"
+      },
+      "severity": {
+        "type": "string",
+        "description": "Severity level of the vulnerability",
+        "enum": [
+          "critical",
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "browsers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Compatible browsers for this payload",
+        "examples": [
+          [
+            "chrome",
+            "firefox",
+            "safari"
+          ],
+          [
+            "all"
+          ]
+        ]
+      }
+    }
+  },
+  "example": {
+    "id": 1,
+    "payload": "<script>alert(1)</script>",
+    "category": "basic",
+    "technique": "script-tag",
+    "context": "html",
+    "description": "Classic XSS payload using script tag",
+    "severity": "high",
+    "browsers": [
+      "all"
+    ]
+  }
+}

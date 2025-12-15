@@ -70,6 +70,19 @@ export default function APIDocsPage() {
         strategies: "['htmlEntities', 'urlEncoding', 'caseVariations', ...]",
         basePayloads: "[...objects with base payload and mutations array]"
       }
+    },
+    {
+      id: 'search',
+      name: 'Search Payloads (Dynamic)',
+      path: '/api/search',
+      description: 'Dynamic search endpoint powered by Cloudflare Pages Functions. Filter payloads by query, category, severity, context, and browser compatibility. Supports up to 500 results.',
+      response: {
+        query: "script",
+        filters: { category: "basic", severity: "high" },
+        count: 45,
+        returned: 45,
+        payloads: "[...filtered payload objects]"
+      }
     }
   ];
 

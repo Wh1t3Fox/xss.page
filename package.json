@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-api.js",
+    "prebuild": "node scripts/generate-api.mjs",
     "build": "next build",
     "start": "next start",
     "export": "serve out"

@@ -195,7 +195,7 @@ export default function LessonPage() {
           {activeTab === 'theory' && lesson.content && (
             <div className="space-y-8">
               {/* Markdown Content */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 prose max-w-none">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 prose prose-lg max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-p:my-4 prose-ul:my-4 prose-ol:my-4 prose-li:my-2 prose-blockquote:my-6 prose-code:text-sm prose-pre:my-6">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{

@@ -4,6 +4,7 @@ import { copyToClipboard } from '../../utils/clipboard';
 
 export default function PayloadFuzzer() {
   // State management
+  const [mode, setMode] = useState('mutation'); // 'mutation' or 'generation'
   const [basePayload, setBasePayload] = useState('');
   const [strategies, setStrategies] = useState({
     htmlEntities: false,
@@ -20,9 +21,11 @@ export default function PayloadFuzzer() {
   });
   const [filterPattern, setFilterPattern] = useState('');
   const [limit, setLimit] = useState(100);
+  const [generationCount, setGenerationCount] = useState(20);
   const [results, setResults] = useState(null);
   const [filterResults, setFilterResults] = useState(null);
   const [copiedIndex, setCopiedIndex] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Example payloads
   const examples = {
@@ -34,39 +37,86 @@ export default function PayloadFuzzer() {
   };
 
   // Event handlers
-  const handleGenerate = () => {
-    if (!basePayload.trim()) {
-      alert('Please enter a base payload');
-      return;
+  const handleGenerate = async () => {
+    // Validation based on mode
+    if (mode === 'mutation') {
+      if (!basePayload.trim()) {
+        alert('Please enter a base payload');
+        return;
+      }
+
+      // Check if at least one strategy is selected
+      const hasStrategy = Object.values(strategies).some(v => v);
+      if (!hasStrategy) {
+        alert('Please select at least one mutation strategy');
+        return;
+      }
     }
 
-    // Check if at least one strategy is selected
-    const hasStrategy = Object.values(strategies).some(v => v);
-    if (!hasStrategy) {
-      alert('Please select at least one mutation strategy');
-      return;
-    }
+    setLoading(true);
+    setResults(null);
+    setFilterResults(null);
 
-    const mutationResults = generateMutations(basePayload, strategies);
+    try {
+      // Build selected strategies array
+      const selectedStrategies = Object.entries(strategies)
+        .filter(([_, enabled]) => enabled)
+        .map(([key, _]) => key);
 
-    // Apply limit to mutations
-    const limitValue = Math.max(1, Math.min(parseInt(limit) || 100, 500));
-    const limitedMutations = mutationResults.mutations.slice(0, limitValue);
+      // Build request body based on mode
+      let requestBody;
+      if (mode === 'mutation') {
+        const limitValue = Math.max(1, Math.min(parseInt(limit) || 100, 500));
+        requestBody = {
+          payload: basePayload,
+          strategies: selectedStrategies,
+          limit: limitValue
+        };
+      } else {
+        // Generation mode
+        const countValue = Math.max(1, Math.min(parseInt(generationCount) || 20, 500));
+        requestBody = {
+          limit: countValue
+        };
 
-    const limitedResults = {
-      ...mutationResults,
-      mutations: limitedMutations,
-      returned: limitedMutations.length,
-      limit: limitValue
-    };
+        // Only include strategies if at least one is selected
+        const hasStrategy = Object.values(strategies).some(v => v);
+        if (hasStrategy) {
+          requestBody.strategies = selectedStrategies;
+        }
+      }
 
-    setResults(limitedResults);
+      // Call API endpoint
+      const response = await fetch('/api/fuzz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
 
-    if (filterPattern && filterPattern.trim()) {
-      const filterTests = testAgainstFilter(limitedMutations, filterPattern);
-      setFilterResults(filterTests);
-    } else {
-      setFilterResults(null);
+      if (!response.ok) {
+        throw new Error(`API error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setResults(data);
+
+      // Apply filter testing if pattern is provided
+      if (filterPattern && filterPattern.trim()) {
+        const payloads = mode === 'mutation' ? data.mutations : data.payloads;
+        const filterTests = testAgainstFilter(
+          payloads.map(p => ({ payload: p.payload })),
+          filterPattern
+        );
+        setFilterResults(filterTests);
+      }
+
+    } catch (error) {
+      console.error('Error generating payloads:', error);
+      alert(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,12 +159,17 @@ export default function PayloadFuzzer() {
   const handleExport = (format) => {
     if (!results) return;
 
+    const payloadList = results.mode === 'mutation' ? results.mutations : results.payloads;
+
     if (format === 'json') {
       const data = JSON.stringify({
-        base: basePayload,
-        strategies: results.strategies,
-        mutations: results.mutations,
+        mode: results.mode,
+        ...(results.mode === 'mutation' && { base: basePayload }),
+        ...(results.strategies && { strategies: results.strategies }),
+        ...(results.mutationsApplied !== undefined && { mutationsApplied: results.mutationsApplied }),
+        [results.mode === 'mutation' ? 'mutations' : 'payloads']: payloadList,
         total: results.total,
+        returned: results.returned,
         generated: new Date().toISOString()
       }, null, 2);
 
@@ -122,19 +177,25 @@ export default function PayloadFuzzer() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'payload-mutations.json';
+      a.download = results.mode === 'mutation' ? 'payload-mutations.json' : 'generated-payloads.json';
       a.click();
       URL.revokeObjectURL(url);
     } else if (format === 'text') {
-      const data = results.mutations
-        .map(m => `[${m.strategy}] ${m.payload}`)
+      const data = payloadList
+        .map(item => {
+          if (results.mode === 'mutation') {
+            return `[${item.strategy}] ${item.payload}`;
+          } else {
+            return `[${item.category}/${item.technique}] ${item.payload}`;
+          }
+        })
         .join('\n');
 
       const blob = new Blob([data], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'payload-mutations.txt';
+      a.download = results.mode === 'mutation' ? 'payload-mutations.txt' : 'generated-payloads.txt';
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -147,8 +208,60 @@ export default function PayloadFuzzer() {
 
   return (
     <div className="space-y-6">
-      {/* Base Payload Input */}
+      {/* Mode Selector */}
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Fuzzer Mode</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button
+            onClick={() => setMode('mutation')}
+            className={`p-4 rounded-lg border-2 transition text-left ${
+              mode === 'mutation'
+                ? 'border-primary-500 bg-primary-50'
+                : 'border-gray-200 hover:border-gray-300'
+            }`}
+          >
+            <div className="flex items-center mb-2">
+              <div className={`w-5 h-5 rounded-full border-2 mr-3 flex items-center justify-center ${
+                mode === 'mutation' ? 'border-primary-500' : 'border-gray-300'
+              }`}>
+                {mode === 'mutation' && (
+                  <div className="w-3 h-3 rounded-full bg-primary-500"></div>
+                )}
+              </div>
+              <span className="font-semibold text-gray-900">Mutation Mode</span>
+            </div>
+            <p className="text-sm text-gray-600 ml-8">
+              Provide a base payload and mutate it using encoding and obfuscation strategies
+            </p>
+          </button>
+          <button
+            onClick={() => setMode('generation')}
+            className={`p-4 rounded-lg border-2 transition text-left ${
+              mode === 'generation'
+                ? 'border-primary-500 bg-primary-50'
+                : 'border-gray-200 hover:border-gray-300'
+            }`}
+          >
+            <div className="flex items-center mb-2">
+              <div className={`w-5 h-5 rounded-full border-2 mr-3 flex items-center justify-center ${
+                mode === 'generation' ? 'border-primary-500' : 'border-gray-300'
+              }`}>
+                {mode === 'generation' && (
+                  <div className="w-3 h-3 rounded-full bg-primary-500"></div>
+                )}
+              </div>
+              <span className="font-semibold text-gray-900">Generation Mode</span>
+            </div>
+            <p className="text-sm text-gray-600 ml-8">
+              Generate arbitrary XSS payloads from templates with optional mutations
+            </p>
+          </button>
+        </div>
+      </div>
+
+      {/* Base Payload Input (Mutation Mode Only) */}
+      {mode === 'mutation' && (
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Base Payload</h3>
         <textarea
           value={basePayload}
@@ -194,11 +307,73 @@ export default function PayloadFuzzer() {
           </button>
         </div>
       </div>
+      )}
+
+      {/* Generation Mode Configuration */}
+      {mode === 'generation' && (
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Generation Settings</h3>
+          <div className="flex items-center gap-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Number of Payloads to Generate
+              </label>
+              <input
+                type="number"
+                value={generationCount}
+                onChange={(e) => setGenerationCount(e.target.value)}
+                min="1"
+                max="500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+              />
+            </div>
+            <div className="flex-shrink-0 pt-6">
+              <span className="text-sm text-gray-600">
+                Max: 500 payloads
+              </span>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 mt-2">
+            Generate arbitrary XSS payloads from weighted templates (event handlers, script tags, SVG, protocol handlers, etc.)
+          </p>
+          <div className="flex gap-2 mt-3">
+            <button
+              onClick={() => setGenerationCount(10)}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+            >
+              10
+            </button>
+            <button
+              onClick={() => setGenerationCount(20)}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+            >
+              20
+            </button>
+            <button
+              onClick={() => setGenerationCount(50)}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+            >
+              50
+            </button>
+            <button
+              onClick={() => setGenerationCount(100)}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium transition"
+            >
+              100
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Mutation Strategies */}
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-bold text-gray-900">Mutation Strategies</h3>
+          <h3 className="text-xl font-bold text-gray-900">
+            Mutation Strategies
+            {mode === 'generation' && (
+              <span className="ml-2 text-sm font-normal text-gray-500">(Optional)</span>
+            )}
+          </h3>
           <button
             onClick={handleSelectAll}
             className="text-sm text-primary-600 hover:text-primary-700 font-medium"
@@ -206,6 +381,11 @@ export default function PayloadFuzzer() {
             {Object.values(strategies).every(v => v) ? 'Deselect All' : 'Select All'}
           </button>
         </div>
+        {mode === 'generation' && (
+          <p className="text-sm text-gray-600 mb-4">
+            Optionally apply mutation strategies to generated payloads for additional variations
+          </p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {Object.entries(strategies).map(([key, enabled]) => (
@@ -227,7 +407,8 @@ export default function PayloadFuzzer() {
         </div>
       </div>
 
-      {/* Result Limit */}
+      {/* Result Limit (Mutation Mode Only) */}
+      {mode === 'mutation' && (
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Result Limit</h3>
         <div className="flex items-center gap-4">
@@ -277,6 +458,7 @@ export default function PayloadFuzzer() {
           </button>
         </div>
       </div>
+      )}
 
       {/* Optional Filter Testing */}
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
@@ -300,16 +482,34 @@ export default function PayloadFuzzer() {
       <div className="flex gap-4">
         <button
           onClick={handleGenerate}
-          className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition flex items-center"
+          disabled={loading}
+          className={`px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition flex items-center ${
+            loading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Generate Mutations
+          {loading ? (
+            <>
+              <svg className="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Generating...
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              {mode === 'mutation' ? 'Generate Mutations' : 'Generate Payloads'}
+            </>
+          )}
         </button>
         <button
           onClick={handleClear}
-          className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition"
+          disabled={loading}
+          className={`px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition ${
+            loading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           Clear
         </button>
@@ -325,13 +525,23 @@ export default function PayloadFuzzer() {
               <div className="text-sm text-blue-600 mt-1">Total Generated</div>
             </div>
             <div className="text-center p-4 bg-indigo-50 rounded-lg">
-              <div className="text-3xl font-bold text-indigo-700">{results.returned || results.mutations.length}</div>
+              <div className="text-3xl font-bold text-indigo-700">{results.returned}</div>
               <div className="text-sm text-indigo-600 mt-1">Displayed</div>
             </div>
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-3xl font-bold text-purple-700">{results.strategies.length}</div>
-              <div className="text-sm text-purple-600 mt-1">Strategies Used</div>
-            </div>
+            {results.mode === 'mutation' && results.strategies && (
+              <div className="text-center p-4 bg-purple-50 rounded-lg">
+                <div className="text-3xl font-bold text-purple-700">{results.strategies.length}</div>
+                <div className="text-sm text-purple-600 mt-1">Strategies Used</div>
+              </div>
+            )}
+            {results.mode === 'generation' && (
+              <div className="text-center p-4 bg-purple-50 rounded-lg">
+                <div className="text-3xl font-bold text-purple-700">
+                  {results.mutationsApplied ? 'Yes' : 'No'}
+                </div>
+                <div className="text-sm text-purple-600 mt-1">Mutations Applied</div>
+              </div>
+            )}
             {filterResults && (
               <>
                 <div className="text-center p-4 bg-green-50 rounded-lg">
@@ -370,21 +580,41 @@ export default function PayloadFuzzer() {
 
           {/* Payload List */}
           <div>
-            <h4 className="text-lg font-bold text-gray-900 mb-4">Generated Payloads</h4>
+            <h4 className="text-lg font-bold text-gray-900 mb-4">
+              {results.mode === 'mutation' ? 'Mutated Payloads' : 'Generated Payloads'}
+            </h4>
             <div className="space-y-3">
-              {results.mutations.map((mutation, idx) => (
+              {(results.mode === 'mutation' ? results.mutations : results.payloads).map((item, idx) => (
                 <div
                   key={idx}
                   className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-semibold">
-                        {mutation.strategy}
-                      </span>
-                      <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">
-                        {mutation.encoding}
-                      </span>
+                      {results.mode === 'mutation' ? (
+                        <>
+                          <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-semibold">
+                            {item.strategy}
+                          </span>
+                          <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">
+                            {item.encoding}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+                            {item.category}
+                          </span>
+                          <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                            {item.technique}
+                          </span>
+                          {item.mutated && (
+                            <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">
+                              Mutated: {item.mutationStrategy}
+                            </span>
+                          )}
+                        </>
+                      )}
                       {filterResults && filterResults[idx] && (
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -398,7 +628,7 @@ export default function PayloadFuzzer() {
                       )}
                     </div>
                     <button
-                      onClick={() => handleCopyPayload(mutation.payload, idx)}
+                      onClick={() => handleCopyPayload(item.payload, idx)}
                       className={`px-3 py-1 rounded-lg text-sm font-medium transition ${
                         copiedIndex === idx
                           ? 'bg-green-600 text-white'
@@ -409,7 +639,7 @@ export default function PayloadFuzzer() {
                     </button>
                   </div>
                   <code className="block bg-gray-900 text-white p-3 rounded text-sm font-mono break-all">
-                    {mutation.payload}
+                    {item.payload}
                   </code>
                 </div>
               ))}
@@ -434,9 +664,14 @@ export default function PayloadFuzzer() {
               d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
             />
           </svg>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Mutations Generated</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            {mode === 'mutation' ? 'No Mutations Generated' : 'No Payloads Generated'}
+          </h3>
           <p className="text-gray-600">
-            Enter a base payload, select mutation strategies, and click "Generate Mutations" to begin fuzzing.
+            {mode === 'mutation'
+              ? 'Enter a base payload, select mutation strategies, and click "Generate Mutations" to begin fuzzing.'
+              : 'Configure generation settings and click "Generate Payloads" to create arbitrary XSS payloads from templates.'
+            }
           </p>
         </div>
       )}

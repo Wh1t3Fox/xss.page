@@ -55,10 +55,8 @@ export default function LessonPage() {
       <Layout>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Lesson Not Found</h1>
-          <Link href={`/learn/${pathId}`}>
-            <a className="text-primary-600 hover:text-primary-700 font-semibold">
-              ← Back to Path
-            </a>
+          <Link href={`/learn/${pathId}`} className="text-primary-600 hover:text-primary-700 font-semibold">
+            ← Back to Path
           </Link>
         </div>
       </Layout>
@@ -120,14 +118,14 @@ export default function LessonPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="mb-4 flex items-center text-sm">
-            <Link href="/learn">
-              <a className="text-gray-600 hover:text-gray-900">Learning Paths</a>
+            <Link href="/learn" className="text-gray-600 hover:text-gray-900">
+              Learning Paths
             </Link>
             <svg className="w-4 h-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <Link href={`/learn/${pathId}`}>
-              <a className="text-gray-600 hover:text-gray-900">{path.title}</a>
+            <Link href={`/learn/${pathId}`} className="text-gray-600 hover:text-gray-900">
+              {path.title}
             </Link>
             <svg className="w-4 h-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

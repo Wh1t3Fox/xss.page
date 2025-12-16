@@ -50,10 +50,8 @@ export default function PathDetail() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Path Not Found</h1>
           <p className="text-gray-600 mb-6">The learning path you're looking for doesn't exist.</p>
-          <Link href="/learn">
-            <a className="text-primary-600 hover:text-primary-700 font-semibold">
-              ← Back to Learning Paths
-            </a>
+          <Link href="/learn" className="text-primary-600 hover:text-primary-700 font-semibold">
+            ← Back to Learning Paths
           </Link>
         </div>
       </Layout>
@@ -92,13 +90,11 @@ export default function PathDetail() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="mb-6">
-            <Link href="/learn">
-              <a className="text-white opacity-80 hover:opacity-100 transition inline-flex items-center">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                All Paths
-              </a>
+            <Link href="/learn" className="text-white opacity-80 hover:opacity-100 transition inline-flex items-center">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              All Paths
             </Link>
           </div>
 
@@ -158,10 +154,8 @@ export default function PathDetail() {
                   {path.prerequisites.map((prereqId, idx) => (
                     <span key={prereqId}>
                       {idx > 0 && ', '}
-                      <Link href={`/learn/${prereqId}`}>
-                        <a className="underline hover:text-yellow-900">
-                          {learningPaths[prereqId]?.title || prereqId}
-                        </a>
+                      <Link href={`/learn/${prereqId}`} className="underline hover:text-yellow-900">
+                        {learningPaths[prereqId]?.title || prereqId}
                       </Link>
                     </span>
                   ))}

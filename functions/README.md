@@ -92,25 +92,58 @@ curl "https://xss.page/api/search?q=onerror&context=html&browser=chrome&limit=50
 
 **POST/GET** `/api/fuzz`
 
-Real-time payload mutation engine. Generates XSS payload variations using encoding, obfuscation, and case manipulation strategies.
+Dual-mode XSS payload tool with mutation and generation capabilities.
 
-**Methods:**
-- `POST` - JSON body with payload and strategies (recommended)
-- `GET` - Query parameters (for testing)
+**IMPORTANT:** This endpoint operates in two distinct modes based on whether a payload is provided.
+
+---
+
+#### MODE 1: Mutation Mode (payload provided)
+
+Mutates a user-provided XSS payload using various encoding and obfuscation strategies.
 
 **POST Request Body:**
 ```json
 {
   "payload": "<script>alert(1)</script>",
-  "strategies": ["htmlEntities", "urlEncoding", "caseVariations"],
+  "strategies": ["htmlEntities", "urlEncoding"],
   "limit": 10
 }
 ```
 
 **GET Query Parameters:**
-- `payload` - Base payload to mutate (required)
-- `strategies` - Comma-separated list of strategies (optional, defaults to all)
+- `payload` - Base payload to mutate (required for mutation mode)
+- `strategies` - Comma-separated list of strategies (optional)
 - `limit` - Maximum number of mutations to return (optional, default: 1, max: 500)
+
+---
+
+#### MODE 2: Generation Mode (no payload)
+
+Generates arbitrary XSS payloads using template-based randomization.
+
+**POST Request Body:**
+```json
+{
+  "strategies": ["htmlEntities", "urlEncoding"],
+  "limit": 20
+}
+```
+
+**GET Query Parameters:**
+- `limit` - Number of payloads to generate (optional, default: 10, max: 500)
+- `strategies` - Comma-separated mutation strategies to apply (optional)
+
+**Payload Categories** (weighted distribution):
+- Event Handlers (30%): `<img onerror=...>`, `<svg onload=...>`
+- Script Tags (20%): `<script>alert(1)</script>`
+- SVG-based (15%): `<svg><script>...</script></svg>`
+- Protocol Handlers (15%): `javascript:alert(1)`, `data:text/html,...`
+- Iframe-based (10%): `<iframe src=javascript:...>`
+- Attribute-based (5%): `<a href=javascript:...>`
+- Encoded/Obfuscated (5%): Entity-encoded, base64, etc.
+
+---
 
 **Available Strategies:**
 - `htmlEntities` - HTML entity encoding (&#x73;&#x63;&#x72;...)

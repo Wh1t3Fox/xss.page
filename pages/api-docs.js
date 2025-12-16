@@ -88,8 +88,9 @@ export default function APIDocsPage() {
       id: 'fuzz',
       name: 'Payload Fuzzer (Dynamic)',
       path: '/api/fuzz',
-      description: 'Real-time payload mutation engine powered by Cloudflare Pages Functions. Generate XSS payload variations using encoding, obfuscation, and case manipulation strategies. Supports both GET and POST requests with customizable result limits (default: 1, max: 500).',
+      description: 'Dual-mode XSS payload tool powered by Cloudflare Pages Functions. MODE 1: Mutate provided payloads using encoding/obfuscation strategies. MODE 2: Generate arbitrary XSS payloads from templates (event handlers, script tags, SVG, protocol handlers, etc.). Supports GET and POST requests with customizable limits.',
       response: {
+        mode: "mutation",
         basePayload: "<script>alert(1)</script>",
         strategies: ["htmlEntities", "urlEncoding"],
         total: 45,
@@ -110,21 +111,24 @@ curl https://xss.page/api/categories.json
 # Search for payloads (dynamic)
 curl "https://xss.page/api/search?q=script&category=basic&limit=20"
 
-# Generate payload mutations (GET, default limit=1)
-curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding"
-
-# Generate payload mutations with custom limit (GET)
+# Fuzz API - MODE 1: Mutation Mode (mutate provided payload)
 curl "https://xss.page/api/fuzz?payload=<script>alert(1)</script>&strategies=htmlEntities,urlEncoding&limit=10"
 
-# Generate payload mutations (POST, default limit=1)
 curl -X POST https://xss.page/api/fuzz \\
   -H "Content-Type: application/json" \\
-  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"]}'
+  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding"],"limit":20}'
 
-# Generate payload mutations with custom limit (POST)
+# Fuzz API - MODE 2: Generation Mode (generate arbitrary payloads)
+curl "https://xss.page/api/fuzz?limit=20"
+
 curl -X POST https://xss.page/api/fuzz \\
   -H "Content-Type: application/json" \\
-  -d '{"payload":"<script>alert(1)</script>","strategies":["htmlEntities","urlEncoding","caseVariations"],"limit":20}'`,
+  -d '{"limit":50}'
+
+# Generation mode with mutations applied
+curl -X POST https://xss.page/api/fuzz \\
+  -H "Content-Type: application/json" \\
+  -d '{"limit":10,"strategies":["htmlEntities","urlEncoding"]}'`,
 
     javascript: `// Fetch all payloads
 fetch('https://xss.page/api/payloads.json')
@@ -143,35 +147,52 @@ fetch('https://xss.page/api/search?q=script&category=basic')
     console.log(\`Found \${data.count} payloads matching query\`);
   });
 
-// Generate payload mutations (default limit=1)
+// Fuzz API - MODE 1: Mutation Mode (mutate provided payload)
 fetch('https://xss.page/api/fuzz', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
     payload: '<script>alert(1)</script>',
-    strategies: ['htmlEntities', 'urlEncoding']
+    strategies: ['htmlEntities', 'urlEncoding'],
+    limit: 10
   })
 })
   .then(response => response.json())
   .then(data => {
+    console.log(\`Mode: \${data.mode}\`);
     console.log(\`Generated \${data.total} total mutations, returned \${data.returned}\`);
     data.mutations.forEach(m => console.log(\`[\${m.strategy}] \${m.payload}\`));
   });
 
-// Generate mutations with custom limit
+// Fuzz API - MODE 2: Generation Mode (generate arbitrary payloads)
 fetch('https://xss.page/api/fuzz', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    payload: '<script>alert(1)</script>',
-    strategies: ['htmlEntities', 'urlEncoding', 'caseVariations'],
     limit: 20
   })
 })
   .then(response => response.json())
   .then(data => {
-    console.log(\`Generated \${data.total} total, returned \${data.returned} (limit: \${data.limit})\`);
-    data.mutations.forEach(m => console.log(\`[\${m.strategy}] \${m.payload}\`));
+    console.log(\`Mode: \${data.mode}\`);
+    console.log(\`Generated \${data.total} payloads\`);
+    data.payloads.forEach(p => {
+      console.log(\`[\${p.category}] \${p.payload}\`);
+    });
+  });
+
+// Generation mode with mutations applied
+fetch('https://xss.page/api/fuzz', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    limit: 10,
+    strategies: ['htmlEntities', 'urlEncoding']
+  })
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(\`Generated \${data.total} payloads with mutations applied\`);
   });`,
 
     python: `import requests
@@ -192,30 +213,40 @@ response = requests.get('https://xss.page/api/search', params={
 search_data = response.json()
 print(f"Found {search_data['count']} matching payloads")
 
-# Generate payload mutations (default limit=1)
-payload_data = {
+# Fuzz API - MODE 1: Mutation Mode (mutate provided payload)
+mutation_data = {
     'payload': '<script>alert(1)</script>',
-    'strategies': ['htmlEntities', 'urlEncoding']
+    'strategies': ['htmlEntities', 'urlEncoding'],
+    'limit': 10
 }
-response = requests.post('https://xss.page/api/fuzz', json=payload_data)
+response = requests.post('https://xss.page/api/fuzz', json=mutation_data)
 fuzz_data = response.json()
 
-print(f"Generated {fuzz_data['total']} total, returned {fuzz_data['returned']}")
-for mutation in fuzz_data['mutations']:
+print(f"Mode: {fuzz_data['mode']}")
+print(f"Generated {fuzz_data['total']} mutations, returned {fuzz_data['returned']}")
+for mutation in fuzz_data['mutations'][:5]:
     print(f"[{mutation['strategy']}] {mutation['payload']}")
 
-# Generate mutations with custom limit
-payload_data_with_limit = {
-    'payload': '<script>alert(1)</script>',
-    'strategies': ['htmlEntities', 'urlEncoding', 'caseVariations'],
+# Fuzz API - MODE 2: Generation Mode (generate arbitrary payloads)
+generation_data = {
     'limit': 20
 }
-response = requests.post('https://xss.page/api/fuzz', json=payload_data_with_limit)
-fuzz_data = response.json()
+response = requests.post('https://xss.page/api/fuzz', json=generation_data)
+gen_data = response.json()
 
-print(f"Generated {fuzz_data['total']} total, returned {fuzz_data['returned']} (limit: {fuzz_data['limit']})")
-for mutation in fuzz_data['mutations'][:5]:  # Show first 5
-    print(f"[{mutation['strategy']}] {mutation['payload']}")`,
+print(f"Mode: {gen_data['mode']}")
+print(f"Generated {gen_data['total']} payloads")
+for payload in gen_data['payloads'][:5]:
+    print(f"[{payload['category']}] {payload['payload']}")
+
+# Generation mode with mutations applied
+generation_with_mutations = {
+    'limit': 10,
+    'strategies': ['htmlEntities', 'urlEncoding']
+}
+response = requests.post('https://xss.page/api/fuzz', json=generation_with_mutations)
+data = response.json()
+print(f"Generated {data['total']} payloads with mutations: {data['mutationsApplied']}")`,
 
     burp: `// Burp Suite Extension Example (Java)
 import burp.*;

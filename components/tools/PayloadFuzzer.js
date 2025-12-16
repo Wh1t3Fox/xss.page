@@ -22,10 +22,26 @@ export default function PayloadFuzzer() {
   const [filterPattern, setFilterPattern] = useState('');
   const [limit, setLimit] = useState(100);
   const [generationCount, setGenerationCount] = useState(20);
+  const [injectionContext, setInjectionContext] = useState('any');
   const [results, setResults] = useState(null);
   const [filterResults, setFilterResults] = useState(null);
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // Injection context options
+  const contextOptions = [
+    { value: 'any', label: 'Any Context (All payloads)', description: 'Works in multiple contexts' },
+    { value: 'html', label: 'HTML Body', description: 'Inside HTML content' },
+    { value: 'html-attribute', label: 'HTML Attribute', description: 'Inside quoted attributes' },
+    { value: 'html-attribute-unquoted', label: 'Unquoted Attribute', description: 'Unquoted attribute values' },
+    { value: 'javascript', label: 'JavaScript', description: 'Inside <script> tags' },
+    { value: 'javascript-string', label: 'JavaScript String', description: 'Inside JS string literals' },
+    { value: 'url', label: 'URL', description: 'Inside href, src, etc.' },
+    { value: 'css', label: 'CSS', description: 'Inside <style> or style attribute' },
+    { value: 'json', label: 'JSON', description: 'Inside JSON data' },
+    { value: 'xml', label: 'XML/SVG', description: 'Inside XML or SVG' },
+    { value: 'comment', label: 'HTML/JS Comment', description: 'Inside comments' }
+  ];
 
   // Example payloads
   const examples = {
@@ -78,6 +94,11 @@ export default function PayloadFuzzer() {
         requestBody = {
           limit: countValue
         };
+
+        // Include context if not 'any'
+        if (injectionContext && injectionContext !== 'any') {
+          requestBody.context = injectionContext;
+        }
 
         // Only include strategies if at least one is selected
         const hasStrategy = Object.values(strategies).some(v => v);
@@ -313,6 +334,29 @@ export default function PayloadFuzzer() {
       {mode === 'generation' && (
         <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
           <h3 className="text-xl font-bold text-gray-900 mb-4">Generation Settings</h3>
+
+          {/* Context Selector */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Injection Context
+            </label>
+            <select
+              value={injectionContext}
+              onChange={(e) => setInjectionContext(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+            >
+              {contextOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label} - {option.description}
+                </option>
+              ))}
+            </select>
+            <p className="text-sm text-gray-500 mt-2">
+              Filter payloads by injection context for more targeted testing
+            </p>
+          </div>
+
+          {/* Payload Count */}
           <div className="flex items-center gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-2">

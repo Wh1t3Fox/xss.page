@@ -76,7 +76,7 @@
  */
 
 import { generateMutations } from '../../utils/payload-fuzzer.mjs';
-import { generateRandomPayloads } from '../../utils/payload-generator.mjs';
+import { generateRandomPayloads, INJECTION_CONTEXTS } from '../../utils/payload-generator.mjs';
 
 // Valid mutation strategies
 const VALID_STRATEGIES = [
@@ -128,7 +128,7 @@ function parseStrategies(strategies) {
 export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
-    const { payload, strategies, limit } = body;
+    const { payload, strategies, limit, context: injectionContext } = body;
 
     // Parse and validate limit
     let resultLimit = parseInt(limit, 10);
@@ -197,8 +197,16 @@ export async function onRequestPost(context) {
 
     // MODE 2: Generation Mode (no payload provided)
     else {
-      // Generate random payloads
-      const generatedPayloads = generateRandomPayloads(resultLimit);
+      // Validate context if provided
+      const validContexts = Object.values(INJECTION_CONTEXTS);
+      const selectedContext = (injectionContext && validContexts.includes(injectionContext))
+        ? injectionContext
+        : INJECTION_CONTEXTS.ANY;
+
+      // Generate random payloads with context filtering
+      const generatedPayloads = generateRandomPayloads(resultLimit, {
+        context: selectedContext
+      });
 
       // Optionally apply mutations if strategies are provided
       const strategyObj = parseStrategies(strategies);
@@ -230,6 +238,7 @@ export async function onRequestPost(context) {
       // Build response
       const response = {
         mode: 'generation',
+        context: selectedContext,
         total: finalPayloads.length,
         returned: finalPayloads.length,
         limit: resultLimit,
@@ -268,6 +277,7 @@ export async function onRequestGet(context) {
     const payload = searchParams.get('payload');
     const limitParam = searchParams.get('limit');
     const strategiesParam = searchParams.get('strategies');
+    const contextParam = searchParams.get('context');
 
     // Parse and validate limit
     let resultLimit = parseInt(limitParam, 10);
@@ -325,8 +335,16 @@ export async function onRequestGet(context) {
 
     // MODE 2: Generation Mode (no payload provided)
     else {
-      // Generate random payloads
-      const generatedPayloads = generateRandomPayloads(resultLimit);
+      // Validate context if provided
+      const validContexts = Object.values(INJECTION_CONTEXTS);
+      const selectedContext = (contextParam && validContexts.includes(contextParam))
+        ? contextParam
+        : INJECTION_CONTEXTS.ANY;
+
+      // Generate random payloads with context filtering
+      const generatedPayloads = generateRandomPayloads(resultLimit, {
+        context: selectedContext
+      });
 
       // Optionally apply mutations if strategies are provided
       const strategyObj = parseStrategies(strategiesParam);
@@ -358,6 +376,7 @@ export async function onRequestGet(context) {
       // Build response
       const response = {
         mode: 'generation',
+        context: selectedContext,
         total: finalPayloads.length,
         returned: finalPayloads.length,
         limit: resultLimit,

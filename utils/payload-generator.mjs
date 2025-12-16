@@ -1,7 +1,23 @@
 /**
  * Payload Generator Utility
  * Generates random XSS payloads using template-based approach with randomization
+ * Supports context-aware generation for different injection points
  */
+
+// Injection contexts for XSS
+export const INJECTION_CONTEXTS = {
+  HTML: 'html',                          // Inside HTML body
+  HTML_ATTRIBUTE: 'html-attribute',      // Inside HTML attributes
+  HTML_ATTRIBUTE_UNQUOTED: 'html-attribute-unquoted', // Unquoted attributes
+  JAVASCRIPT: 'javascript',              // Inside <script> or event handlers
+  JAVASCRIPT_STRING: 'javascript-string', // Inside JS string literal
+  URL: 'url',                            // Inside href, src, etc.
+  CSS: 'css',                            // Inside <style> or style attribute
+  JSON: 'json',                          // Inside JSON data
+  XML: 'xml',                            // Inside XML/SVG
+  COMMENT: 'comment',                    // Inside HTML/JS comments
+  ANY: 'any'                             // Works in multiple contexts
+};
 
 // Random number generator for payload variations
 const randomNum = () => Math.floor(Math.random() * 100) + 1;
@@ -118,6 +134,7 @@ function generateScriptTag() {
     category: 'script-tag',
     technique: 'script',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -163,6 +180,7 @@ function generateEventHandler() {
     category: 'event-handler',
     technique: event,
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -200,6 +218,7 @@ function generateSVG() {
     category: 'svg',
     technique: 'svg-injection',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.XML, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -238,6 +257,7 @@ function generateProtocolHandler() {
     category: 'protocol-handler',
     technique: 'protocol',
     context: 'url',
+    contexts: [INJECTION_CONTEXTS.URL, INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -273,6 +293,7 @@ function generateIframe() {
     category: 'iframe',
     technique: 'iframe-injection',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -310,6 +331,7 @@ function generateAttributeBased() {
     category: 'attribute',
     technique: 'attribute-injection',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.URL, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -361,6 +383,7 @@ function generateEncoded() {
     category: 'encoded',
     technique: 'encoding',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.JAVASCRIPT, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -391,6 +414,7 @@ function generateDOMBased() {
     category: 'dom-based',
     technique: sink,
     context: 'javascript',
+    contexts: [INJECTION_CONTEXTS.JAVASCRIPT, INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -427,6 +451,7 @@ function generateFramework() {
     category: 'framework',
     technique: 'template-injection',
     context: 'javascript',
+    contexts: [INJECTION_CONTEXTS.JAVASCRIPT, INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.JSON, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -471,6 +496,7 @@ function generateContextBreaking() {
     category: 'context-breaking',
     technique: 'escape',
     context: 'mixed',
+    contexts: [INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.JAVASCRIPT_STRING, INJECTION_CONTEXTS.COMMENT, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -522,6 +548,7 @@ function generateWAFBypass() {
     category: 'waf-bypass',
     technique: 'evasion',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.HTML_ATTRIBUTE, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
@@ -570,12 +597,13 @@ function generateModernHTML5() {
     category: 'html5',
     technique: 'modern-api',
     context: 'html',
+    contexts: [INJECTION_CONTEXTS.HTML, INJECTION_CONTEXTS.JAVASCRIPT, INJECTION_CONTEXTS.ANY],
     generated: true
   };
 }
 
 /**
- * 13. Polyglot Templates (5% weight)
+ * 13. Polyglot Templates (4% weight)
  */
 function generatePolyglot() {
   const num = randomNum();
@@ -617,6 +645,7 @@ function generatePolyglot() {
     category: 'polyglot',
     technique: 'multi-context',
     context: 'mixed',
+    contexts: [INJECTION_CONTEXTS.ANY], // Works in multiple contexts
     generated: true
   };
 }
@@ -694,20 +723,79 @@ function applyRandomVariations(payload) {
 }
 
 /**
+ * Filter generators by injection context
+ * @param {string} context - Injection context to filter by
+ * @returns {array} Filtered generators
+ */
+function filterGeneratorsByContext(context) {
+  if (!context || context === INJECTION_CONTEXTS.ANY) {
+    return GENERATORS; // Return all generators
+  }
+
+  // Filter generators by testing each one
+  const contextCompatibleGenerators = [];
+
+  for (const genConfig of GENERATORS) {
+    // Generate a sample payload to check its contexts
+    const sample = genConfig.generator();
+    if (sample.contexts && sample.contexts.includes(context)) {
+      contextCompatibleGenerators.push(genConfig);
+    }
+  }
+
+  // If no compatible generators found, fall back to ALL generators
+  return contextCompatibleGenerators.length > 0 ? contextCompatibleGenerators : GENERATORS;
+}
+
+/**
+ * Select a random generator based on weights from a filtered set
+ * @param {array} generators - Array of generator configs
+ * @returns {function} Selected generator function
+ */
+function selectGeneratorFromSet(generators) {
+  if (generators.length === 0) return GENERATORS[0].generator;
+
+  // Calculate cumulative weights for this set
+  const totalWeight = generators.reduce((sum, g) => sum + g.weight, 0);
+  const cumulativeWeights = [];
+  let cumulative = 0;
+
+  generators.forEach(g => {
+    cumulative += g.weight;
+    cumulativeWeights.push({ generator: g.generator, threshold: cumulative / totalWeight });
+  });
+
+  const rand = Math.random();
+  for (const { generator, threshold } of cumulativeWeights) {
+    if (rand <= threshold) {
+      return generator;
+    }
+  }
+
+  return generators[0].generator; // Fallback
+}
+
+/**
  * Generate random XSS payloads
  * @param {number} count - Number of payloads to generate
  * @param {object} options - Generation options
+ * @param {string} options.context - Injection context (html, javascript, etc.)
+ * @param {boolean} options.applyVariations - Apply random variations
  * @returns {array} Array of generated payload objects
  */
 export function generateRandomPayloads(count = 10, options = {}) {
   const {
-    applyVariations = true
+    applyVariations = true,
+    context = INJECTION_CONTEXTS.ANY
   } = options;
+
+  // Filter generators by context
+  const compatibleGenerators = filterGeneratorsByContext(context);
 
   const payloads = [];
 
   for (let i = 0; i < count; i++) {
-    const generator = selectGenerator();
+    const generator = selectGeneratorFromSet(compatibleGenerators);
     let payloadObj = generator();
 
     // Apply random variations

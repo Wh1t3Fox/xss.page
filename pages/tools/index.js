@@ -73,7 +73,7 @@ export default function Tools() {
         </svg>
       ),
       href: '/learn',
-      status: 'coming',
+      status: 'available',
       tags: ['Tutorials', 'Challenges', 'Education']
     }
   ];

@@ -169,9 +169,15 @@ curl "https://xss.page/api/fuzz?payload=<img src=x>&strategies=htmlEntities,case
 ```
 
 **Response Fields:**
-- `total` - Total number of mutations generated
+- `total` - Total number of mutations generated (excluding original)
 - `returned` - Actual number of mutations returned (limited by `limit`)
 - `limit` - The limit value used for this request
+- `basePayload` - The original payload (not included in mutations array)
+
+**Important Notes:**
+- The original payload is NOT included in the mutations array
+- Only mutated variations are returned
+- Use `basePayload` field to access the original
 
 **Limits:**
 - Maximum payload size: 5000 characters

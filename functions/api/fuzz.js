@@ -3,6 +3,9 @@
  *
  * Generates XSS payload mutations using various encoding and obfuscation techniques.
  *
+ * IMPORTANT: The original payload is NOT included in the mutations array.
+ * Only mutated variations are returned. The original is available in the basePayload field.
+ *
  * Endpoints:
  * - POST /api/fuzz - Generate mutations from JSON payload
  * - GET /api/fuzz - Generate mutations from query parameters (testing)
@@ -132,14 +135,17 @@ export async function onRequestPost(context) {
     // Generate mutations
     const results = generateMutations(payload, strategyObj);
 
+    // Filter out the original payload (strategy === 'original')
+    const mutationsOnly = results.mutations.filter(m => m.strategy !== 'original');
+
     // Apply limit to mutations
-    const limitedMutations = results.mutations.slice(0, resultLimit);
+    const limitedMutations = mutationsOnly.slice(0, resultLimit);
 
     // Build response with limit information
     const response = {
       basePayload: payload,
       strategies: results.strategies,
-      total: results.total,
+      total: mutationsOnly.length,
       returned: limitedMutations.length,
       limit: resultLimit,
       mutations: limitedMutations
@@ -214,14 +220,17 @@ export async function onRequestGet(context) {
     // Generate mutations
     const results = generateMutations(payload, strategyObj);
 
+    // Filter out the original payload (strategy === 'original')
+    const mutationsOnly = results.mutations.filter(m => m.strategy !== 'original');
+
     // Apply limit to mutations
-    const limitedMutations = results.mutations.slice(0, resultLimit);
+    const limitedMutations = mutationsOnly.slice(0, resultLimit);
 
     // Build response with limit information
     const response = {
       basePayload: payload,
       strategies: results.strategies,
-      total: results.total,
+      total: mutationsOnly.length,
       returned: limitedMutations.length,
       limit: resultLimit,
       mutations: limitedMutations

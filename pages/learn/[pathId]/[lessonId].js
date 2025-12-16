@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Layout from '../../../components/Layout';
 import TabNavigation from '../../../components/TabNavigation';
 import Challenge from '../../../components/learn/Challenge';
@@ -194,20 +196,23 @@ export default function LessonPage() {
             <div className="space-y-8">
               {/* Markdown Content */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 prose max-w-none">
-                <div dangerouslySetInnerHTML={{
-                  __html: lesson.content.theory.split('\n').map(line => {
-                    // Simple markdown parsing (you might want to use a proper markdown library)
-                    if (line.startsWith('# ')) return `<h1>${line.substring(2)}</h1>`;
-                    if (line.startsWith('## ')) return `<h2>${line.substring(3)}</h2>`;
-                    if (line.startsWith('### ')) return `<h3>${line.substring(4)}</h3>`;
-                    if (line.startsWith('- ')) return `<li>${line.substring(2)}</li>`;
-                    if (line.startsWith('> ')) return `<blockquote>${line.substring(2)}</blockquote>`;
-                    if (line.startsWith('**') && line.endsWith('**')) return `<strong>${line.substring(2, line.length - 2)}</strong>`;
-                    if (line.trim() === '') return '<br>';
-                    if (line.startsWith('```')) return line.includes('```') ? '<pre><code>' : '</code></pre>';
-                    return `<p>${line}</p>`;
-                  }).join('\n')
-                }} />
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        <CodeBlock code={String(children).replace(/\n$/, '')} language={match[1]} />
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    }
+                  }}
+                >
+                  {lesson.content.theory}
+                </ReactMarkdown>
               </div>
 
               {/* Code Examples */}

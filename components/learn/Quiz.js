@@ -7,12 +7,15 @@
 import { useState } from 'react';
 import { calculateQuizScore } from '../../utils/challenge-validator';
 import { ProgressManager } from '../../utils/progress-manager';
+import Confetti from '../shared/Confetti';
+import AnimatedCounter from '../shared/AnimatedCounter';
 
 export default function Quiz({ questions, lessonId, onComplete }) {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [results, setResults] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleAnswerSelect = (questionIndex, answerIndex) => {
     if (submitted) return;
@@ -38,8 +41,10 @@ export default function Quiz({ questions, lessonId, onComplete }) {
     setSubmitted(true);
     setIsSubmitting(false);
 
-    // Save quiz score
+    // Trigger celebration for passed quiz
     if (quizResults.passed) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3000);
       ProgressManager.completeLesson(lessonId, quizResults.score);
     }
 
@@ -211,15 +216,19 @@ export default function Quiz({ questions, lessonId, onComplete }) {
           )}
         </button>
       ) : (
-        <div className="bg-white rounded-lg shadow-md border-2 border-gray-200 p-6">
+        <div className={`bg-white rounded-lg shadow-md border-2 p-6 animate-fadeIn ${
+          results.passed
+            ? 'border-green-300 animate-pulseGlow'
+            : 'border-gray-200'
+        }`}>
           <div className="text-center">
-            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 animate-scaleIn ${
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
               results.passed
-                ? 'bg-green-100'
-                : 'bg-yellow-100'
+                ? 'bg-green-100 animate-bounceIn'
+                : 'bg-yellow-100 animate-scaleIn'
             }`}>
               {results.passed ? (
-                <svg className="w-10 h-10 text-green-600 animate-scaleIn" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               ) : (
@@ -230,15 +239,15 @@ export default function Quiz({ questions, lessonId, onComplete }) {
             </div>
 
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              {results.passed ? 'Quiz Passed!' : 'Keep Practicing'}
+              {results.passed ? '🎉 Quiz Passed!' : '💭 Keep Practicing'}
             </h3>
 
-            <div className="text-4xl font-bold text-primary-600 mb-4">
-              {results.score}%
+            <div className="text-4xl font-bold text-primary-600 mb-4 animate-celebration">
+              <AnimatedCounter value={results.score} duration={800} suffix="%" />
             </div>
 
             <p className="text-gray-600 mb-6">
-              You got {results.correct} out of {results.total} questions correct.
+              You got <span className="font-semibold text-primary-600">{results.correct}</span> out of <span className="font-semibold">{results.total}</span> questions correct.
               {results.passed
                 ? ' Great job!'
                 : ' You need 70% to pass. Review the lesson material and try again.'}
@@ -255,6 +264,9 @@ export default function Quiz({ questions, lessonId, onComplete }) {
           </div>
         </div>
       )}
+
+      {/* Celebration Confetti */}
+      <Confetti trigger={showConfetti} duration={3000} />
     </div>
   );
 }

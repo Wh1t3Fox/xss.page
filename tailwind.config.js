@@ -29,6 +29,11 @@ module.exports = {
         'slideInDown': 'slideInDown 0.3s ease-out',
         'scaleIn': 'scaleIn 0.2s ease-out',
         'shimmer': 'shimmer 2s infinite',
+        'bounceIn': 'bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        'shake': 'shake 0.4s ease-in-out',
+        'pulseGlow': 'pulseGlow 1s ease-out',
+        'slideUp': 'slideUp 0.3s ease-out',
+        'celebration': 'celebration 0.8s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -54,6 +59,32 @@ module.exports = {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        bounceIn: {
+          '0%': { opacity: '0', transform: 'scale(0)' },
+          '50%': { opacity: '1', transform: 'scale(1.1)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-4px)' },
+          '20%, 40%, 60%, 80%': { transform: 'translateX(4px)' },
+        },
+        pulseGlow: {
+          '0%': { boxShadow: '0 0 0 0 rgba(34, 197, 94, 0.7)' },
+          '50%': { boxShadow: '0 0 20px 10px rgba(34, 197, 94, 0.3)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(34, 197, 94, 0)' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        celebration: {
+          '0%': { transform: 'scale(1) rotate(0deg)' },
+          '25%': { transform: 'scale(1.1) rotate(-5deg)' },
+          '50%': { transform: 'scale(1.2) rotate(5deg)' },
+          '75%': { transform: 'scale(1.1) rotate(-3deg)' },
+          '100%': { transform: 'scale(1) rotate(0deg)' },
         },
       },
       typography: (theme) => ({

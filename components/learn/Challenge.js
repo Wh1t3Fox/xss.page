@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { validateChallenge, calculatePoints } from '../../utils/challenge-validator';
 import { ProgressManager } from '../../utils/progress-manager';
 import CodeBlock from '../CodeBlock';
+import Confetti from '../shared/Confetti';
+import AnimatedCounter from '../shared/AnimatedCounter';
 
 export default function Challenge({ challenge, onComplete }) {
   const [payload, setPayload] = useState('');
@@ -17,6 +19,8 @@ export default function Challenge({ challenge, onComplete }) {
   const [showSolution, setShowSolution] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [earnedPoints, setEarnedPoints] = useState(0);
 
   // Load challenge progress
   useEffect(() => {
@@ -41,6 +45,13 @@ export default function Challenge({ challenge, onComplete }) {
 
     if (validation.success) {
       const finalPoints = calculatePoints(challenge.points, attempts + 1, hintsUsed);
+
+      // Trigger celebration animations
+      setShowConfetti(true);
+      setEarnedPoints(finalPoints);
+
+      // Reset confetti after animation
+      setTimeout(() => setShowConfetti(false), 3000);
 
       // Save progress
       ProgressManager.completeChallenge(
@@ -225,39 +236,44 @@ export default function Challenge({ challenge, onComplete }) {
 
       {/* Result Feedback */}
       {result && (
-        <div className={`border-l-4 rounded-lg p-5 mb-6 animate-slideInDown ${
+        <div className={`border-l-4 rounded-lg p-5 mb-6 ${
           result.success
-            ? 'bg-green-50 border-green-400'
-            : 'bg-red-50 border-red-400'
+            ? 'bg-green-50 border-green-400 animate-slideInDown animate-pulseGlow'
+            : 'bg-orange-50 border-orange-400 animate-shake'
         }`}>
           <div className="flex items-start">
-            <div className={`flex-shrink-0 ${result.success ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`flex-shrink-0 ${result.success ? 'text-green-600' : 'text-orange-600'}`}>
               {result.success ? (
-                <svg className="w-6 h-6 animate-scaleIn" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 animate-bounceIn" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 animate-fadeIn" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
               )}
             </div>
             <div className="ml-3 flex-1">
-              <h4 className={`font-semibold mb-2 ${result.success ? 'text-green-900' : 'text-red-900'}`}>
-                {result.success ? 'Challenge Completed!' : 'Not Quite...'}
+              <h4 className={`font-semibold mb-2 ${result.success ? 'text-green-900' : 'text-orange-900'}`}>
+                {result.success ? '🎉 Challenge Completed!' : '💭 Keep Trying...'}
               </h4>
-              <p className={`text-sm mb-2 ${result.success ? 'text-green-800' : 'text-red-800'}`}>
+              <p className={`text-sm mb-2 ${result.success ? 'text-green-800' : 'text-orange-800'}`}>
                 {result.feedback}
               </p>
               {result.hint && (
-                <p className="text-sm text-gray-700 italic mt-2">
-                  💡 {result.hint}
-                </p>
+                <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg animate-slideUp">
+                  <p className="text-sm text-yellow-900 font-medium flex items-start">
+                    <svg className="w-5 h-5 mr-2 flex-shrink-0 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+                    </svg>
+                    <span>{result.hint}</span>
+                  </p>
+                </div>
               )}
               {result.success && (
-                <div className="mt-3">
-                  <span className="inline-flex px-4 py-2 bg-green-600 text-white rounded-full text-sm font-semibold">
-                    +{result.points} points earned
+                <div className="mt-3 animate-slideUp">
+                  <span className="inline-flex px-4 py-2 bg-green-600 text-white rounded-full text-sm font-semibold animate-celebration">
+                    +<AnimatedCounter value={earnedPoints} duration={600} /> points earned
                   </span>
                 </div>
               )}
@@ -292,6 +308,9 @@ export default function Challenge({ challenge, onComplete }) {
           Show Solution
         </button>
       )}
+
+      {/* Celebration Confetti */}
+      <Confetti trigger={showConfetti} duration={3000} />
     </div>
   );
 }

@@ -86,7 +86,7 @@ export default function Challenge({ challenge, onComplete }) {
   const currentPoints = calculatePoints(challenge.points, attempts + 1, hintsUsed);
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-6 animate-fadeInUp">
       {/* Challenge Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
@@ -156,7 +156,7 @@ export default function Challenge({ challenge, onComplete }) {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div className="bg-white rounded p-3 border border-gray-200">
             <span className="font-semibold text-gray-700">Context:</span>
             <span className="ml-2 text-gray-600">{challenge.scenario.context}</span>
@@ -177,7 +177,7 @@ export default function Challenge({ challenge, onComplete }) {
           value={payload}
           onChange={(e) => setPayload(e.target.value)}
           placeholder="Enter your XSS payload here..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-mono text-sm resize-none"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-mono text-base sm:text-sm resize-none"
           rows={5}
           disabled={isCompleted}
         />
@@ -233,7 +233,7 @@ export default function Challenge({ challenge, onComplete }) {
           <div className="flex items-start">
             <div className={`flex-shrink-0 ${result.success ? 'text-green-600' : 'text-red-600'}`}>
               {result.success ? (
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 animate-scaleIn" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               ) : (
@@ -287,7 +287,7 @@ export default function Challenge({ challenge, onComplete }) {
       {isCompleted && !showSolution && (
         <button
           onClick={handleRevealSolution}
-          className="w-full py-2 text-primary-600 border-2 border-primary-200 rounded-lg hover:bg-primary-50 transition font-semibold"
+          className="w-full py-3 text-primary-600 border-2 border-primary-200 rounded-lg hover:bg-primary-50 transition font-semibold min-h-[44px]"
         >
           Show Solution
         </button>

@@ -33,7 +33,7 @@ export default function PathCard({ path, progress = 0 }) {
     <Link href={`/learn/${path.id}`}>
       <div className={`bg-white rounded-lg shadow-md border-2 ${borderColors[path.color] || borderColors.green} p-6 cursor-pointer transition-all hover:shadow-lg group`}>
         {/* Header */}
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-0 mb-4">
           <div>
             <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition">
               {path.title}
@@ -43,7 +43,7 @@ export default function PathCard({ path, progress = 0 }) {
             </p>
           </div>
 
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${difficultyColors[path.difficulty] || difficultyColors.beginner}`}>
+          <span className={`self-start sm:self-auto px-3 py-1 rounded-full text-xs font-semibold ${difficultyColors[path.difficulty] || difficultyColors.beginner}`}>
             {path.difficulty.toUpperCase()}
           </span>
         </div>

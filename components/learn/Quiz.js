@@ -62,7 +62,7 @@ export default function Quiz({ questions, lessonId, onComplete }) {
       {/* Quiz Header */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-2">Knowledge Check</h3>
-        <p className="text-gray-600">
+        <p className="text-sm sm:text-base text-gray-600">
           Test your understanding with {questions.length} multiple choice questions.
           You need 70% to pass.
         </p>
@@ -119,7 +119,8 @@ export default function Quiz({ questions, lessonId, onComplete }) {
                     key={oIndex}
                     onClick={() => handleAnswerSelect(qIndex, oIndex)}
                     disabled={submitted}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                    style={{ animationDelay: `${oIndex * 50}ms` }}
+                    className={`w-full text-left p-4 rounded-lg border-2 transition-all animate-fadeInUp min-h-[56px] ${
                       submitted
                         ? showCorrectAnswer
                           ? 'border-green-400 bg-green-100'
@@ -212,13 +213,13 @@ export default function Quiz({ questions, lessonId, onComplete }) {
       ) : (
         <div className="bg-white rounded-lg shadow-md border-2 border-gray-200 p-6">
           <div className="text-center">
-            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 animate-scaleIn ${
               results.passed
                 ? 'bg-green-100'
                 : 'bg-yellow-100'
             }`}>
               {results.passed ? (
-                <svg className="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-10 h-10 text-green-600 animate-scaleIn" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               ) : (

@@ -29,7 +29,7 @@ export default function ProgressBar({ progress, showPercentage = true, size = 'm
     <div className="w-full">
       <div className={`w-full ${sizeClasses[size]} bg-gray-200 rounded-full overflow-hidden`}>
         <div
-          className={`h-full ${colorClasses[color]} transition-all duration-500 ease-out`}
+          className={`h-full ${colorClasses[color]} transition-all duration-500 ease-out animate-fadeIn`}
           style={{ width: `${clampedProgress}%` }}
         />
       </div>

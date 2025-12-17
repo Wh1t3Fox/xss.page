@@ -13,12 +13,12 @@ export default function LessonCard({ lesson, pathId, progress, isLocked = false 
 
   return (
     <Link href={isLocked ? '#' : `/learn/${pathId}/${lesson.id}`}>
-      <div className={`bg-white rounded-lg shadow-sm border-2 p-5 transition-all ${
+      <div className={`bg-white rounded-lg shadow-sm border-2 p-4 sm:p-5 transition-all ${
         isLocked
           ? 'border-gray-200 opacity-60 cursor-not-allowed'
           : 'border-gray-200 hover:border-primary-400 hover:shadow-md cursor-pointer'
       }`}>
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           {/* Content */}
           <div className="flex-1">
             <div className="flex items-center mb-2">
@@ -87,7 +87,7 @@ export default function LessonCard({ lesson, pathId, progress, isLocked = false 
           </div>
 
           {/* Status Badge & Arrow */}
-          <div className="ml-4 flex flex-col items-end">
+          <div className="ml-0 sm:ml-4 mt-3 sm:mt-0 flex flex-col items-start sm:items-end">
             {isCompleted && (
               <span className="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 mb-2">
                 DONE

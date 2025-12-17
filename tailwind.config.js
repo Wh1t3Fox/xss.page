@@ -22,6 +22,40 @@ module.exports = {
           700: '#b91c1c',
         },
       },
+      animation: {
+        'fadeIn': 'fadeIn 0.3s ease-in',
+        'fadeInUp': 'fadeInUp 0.4s ease-out',
+        'slideInRight': 'slideInRight 0.4s ease-out',
+        'slideInDown': 'slideInDown 0.3s ease-out',
+        'scaleIn': 'scaleIn 0.2s ease-out',
+        'shimmer': 'shimmer 2s infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInDown: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {

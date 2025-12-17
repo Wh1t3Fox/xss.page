@@ -9,6 +9,7 @@ import Head from 'next/head';
 import Layout from '../../components/Layout';
 import PathCard from '../../components/learn/PathCard';
 import StatsCard from '../../components/learn/StatsCard';
+import { PathCardSkeleton } from '../../components/learn/Skeleton';
 import { learningPaths } from '../../data/learning-paths';
 import { ProgressManager } from '../../utils/progress-manager';
 
@@ -24,10 +25,15 @@ export default function LearnHub() {
   if (!progress) {
     return (
       <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading...</p>
+        <Head>
+          <title>Learning Paths - XSS.page</title>
+        </Head>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="h-8 bg-gray-200 rounded w-64 mb-8 animate-pulse"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map(i => (
+              <PathCardSkeleton key={i} />
+            ))}
           </div>
         </div>
       </Layout>

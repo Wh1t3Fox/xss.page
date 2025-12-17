@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Layout from '../../components/Layout';
 import LessonCard from '../../components/learn/LessonCard';
 import ProgressBar from '../../components/learn/ProgressBar';
+import { LessonCardSkeleton } from '../../components/learn/Skeleton';
 import { learningPaths, lessons } from '../../data/learning-paths';
 import { ProgressManager } from '../../utils/progress-manager';
 
@@ -32,10 +33,21 @@ export default function PathDetail() {
   if (!pathId || !progress) {
     return (
       <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading...</p>
+        <Head>
+          <title>Loading Path - XSS.page</title>
+        </Head>
+        <div className="bg-gray-50 border-b border-gray-200 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="h-8 bg-gray-200 rounded w-48 mb-4 animate-pulse"></div>
+            <div className="h-6 bg-gray-100 rounded w-96 animate-pulse"></div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="h-6 bg-gray-200 rounded w-32 mb-6 animate-pulse"></div>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map(i => (
+              <LessonCardSkeleton key={i} />
+            ))}
           </div>
         </div>
       </Layout>

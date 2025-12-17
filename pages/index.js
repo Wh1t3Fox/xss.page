@@ -4,7 +4,9 @@ import Hero from '../components/Hero'
 import XSSTypeCard from '../components/XSSTypeCard'
 import ResourceCard from '../components/ResourceCard'
 import ToolCard from '../components/shared/ToolCard'
+import PathCard from '../components/learn/PathCard'
 import SEO from '../components/SEO'
+import { learningPaths } from '../data/learning-paths'
 
 export default function HomePage() {
   const xssTypes = [
@@ -83,6 +85,12 @@ export default function HomePage() {
       url: 'https://hackerone.com/hacktivity?querystring=XSS',
       type: 'guide'
     }
+  ]
+
+  const featuredPaths = [
+    learningPaths.beginner,
+    learningPaths.offensive,
+    learningPaths.defensive
   ]
 
   return (
@@ -205,7 +213,39 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="resources" className="bg-gray-100 py-16">
+        {/* Learning Paths Section */}
+        <section className="bg-gray-100 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Start Your Learning Journey
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Master XSS security through structured, hands-on learning paths.
+                Track your progress, complete challenges, and earn points.
+              </p>
+            </div>
+
+            {/* Featured Paths Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {featuredPaths.map(path => (
+                <PathCard key={path.id} path={path} progress={0} />
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <Link href="/learn" className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition">
+                View All Learning Paths
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section id="resources" className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
               Resources & Tools
